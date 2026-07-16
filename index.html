@@ -152,8 +152,7 @@
 
   <div class="tabs" id="tabs">
     <button class="tab active" data-tab="pessoas">Pessoas <span class="pill" id="cntPessoas">0</span></button>
-    <button class="tab" data-tab="fju">Dias da FJU</button>
-    <button class="tab" data-tab="reuniao">Dias de Reunião</button>
+    <button class="tab" data-tab="dias">Dias de Reunião/FJU</button>
     <button class="tab" data-tab="gerar">Gerar prompt</button>
     <button class="tab hidden" id="tabConfig" data-tab="config">Configurações</button>
   </div>
@@ -173,16 +172,14 @@
     <div class="grid" id="people"></div>
   </div>
 
-  <div id="view-fju" class="hidden"></div>
-  <div id="view-reuniao" class="hidden"></div>
+  <div id="view-dias" class="hidden"></div>
 
   <div id="view-gerar" class="hidden">
     <div class="gen-config">
       <label class="field" style="max-width:220px">Mês / Ano da escala<input type="month" id="genMonth"></label>
       <p class="hint">Os prompts se atualizam com o mês, as pessoas e os dias. Quem está <strong>em aprendizado</strong> não entra. Toque em <strong>Copiar</strong> e cole numa IA. Sempre confira as datas.</p>
     </div>
-    <div class="prompt-card"><div class="ph"><h3>Prompt — Reuniões</h3><button class="btn primary sm" id="copyReu">Copiar</button></div><pre class="prompt-body" id="promptReu"></pre></div>
-    <div class="prompt-card"><div class="ph"><h3>Prompt — FJU</h3><button class="btn primary sm" id="copyFju">Copiar</button></div><pre class="prompt-body" id="promptFju"></pre></div>
+    <div class="prompt-card"><div class="ph"><h3>Prompt da escala</h3><button class="btn primary sm" id="copyPrompt">Copiar</button></div><pre class="prompt-body" id="promptOut"></pre></div>
   </div>
 
   <div id="view-config" class="hidden"></div>
@@ -205,8 +202,7 @@
       </div>
       <div class="avail-editor">
         <div class="blk-t">Disponibilidade <span style="font-weight:500">(marque só os dias que a pessoa ajuda)</span></div>
-        <div style="margin-bottom:12px"><div class="avail-line" style="margin-bottom:6px">FJU</div><div class="slots-pick" id="pickFju"></div></div>
-        <div><div class="avail-line" style="margin-bottom:6px">Reuniões</div><div class="slots-pick" id="pickReu"></div></div>
+        <div class="slots-pick" id="pickDias"></div>
       </div>
       <label class="field">Observações livres<textarea id="fObs" placeholder="Ex: só chega 19h30 / tem câmera própria…"></textarea></label>
     </div>
@@ -246,10 +242,9 @@ const AREAS = [ {k:'jornalismo',l:'Jornalismo'},{k:'fotografia',l:'Fotografia'},
 const AV_OPTS = [['nao','Não'],['gravar','Gravar'],['editar','Editar'],['ambos','Ambos']];
 const AV_LABEL = {gravar:'gravar', editar:'editar', ambos:'gravar e editar'};
 
-function defaultTurnos(){
-  return { fju:[ {id:'t_fju_sab', nome:'Encontro Jovem – Sábado', dow:6, hora:'16h', mark:'◻'}, {id:'t_fju_seg', nome:'Algo a Mais – Segunda', dow:1, hora:'19h', mark:'⬛'} ],
-    reuniao:[ {id:'t_reu_dom', nome:'Domingo', dow:0, hora:'07h', mark:'⬛'}, {id:'t_reu_qua', nome:'Quarta-feira', dow:3, hora:'19h', mark:'🟥'}, {id:'t_reu_qui', nome:'Quinta-feira', dow:4, hora:'19h', mark:'🟥'} ] };
-}
+const SEED_TURNOS = [{"id": "t_fju_sab", "dow": 6, "hora": "16h", "mark": "◻", "nome": "Encontro Jovem – Sábado"}, {"id": "t_reu_dom", "dow": 0, "hora": "07h", "mark": "⬛", "nome": "Domingo"}, {"id": "t_fju_seg", "dow": 1, "hora": "19h", "mark": "⬛", "nome": "Algo a Mais – Segunda"}, {"id": "t_reu_qui", "dow": 3, "hora": "19h", "mark": "🟥", "nome": "Quarta-feira"}, {"id": "tmrm3sthqb8h", "dow": 4, "hora": "19h", "mark": "🟥", "nome": "Quinta-feira"}];
+const SEED_PESSOAS = [{"id": "pmrm3u3uzk1p4", "nome": "João Pedro", "local": "Catedral", "obs": "Líder do projeto Mídia e responsável do bloco", "aprendizado": false, "areas": {"av": "ambos", "redes": false, "design": true, "fotografia": true, "jornalismo": false}, "disp": {"t_fju_sab": true, "t_fju_seg": true, "t_reu_dom": true, "t_reu_qui": true, "tmrm3sthqb8h": true}}, {"id": "pmrm3ux7f5hdd", "nome": "Daniel", "local": "Catedral", "obs": "Principal editor de vídeos", "aprendizado": false, "areas": {"av": "ambos", "redes": false, "design": true, "fotografia": true, "jornalismo": false}, "disp": {"t_fju_sab": true, "t_fju_seg": true, "t_reu_dom": true, "t_reu_qui": true, "tmrm3sthqb8h": true}}, {"id": "pmrm3vnbf74rx", "nome": "Gabriel", "local": "Catedral", "obs": "Ainda não foi atendido por BH para trabalhar nas outras reuniões", "aprendizado": false, "areas": {"av": "ambos", "redes": false, "design": true, "fotografia": true, "jornalismo": false}, "disp": {"t_fju_sab": true, "t_fju_seg": true}}, {"id": "pmrm3wjztgfy6", "nome": "Janaína", "local": "Catedral", "obs": "Já foi atendida mas ainda está sendo observado pelo pastor pra liberação\nPrecisa praticar mais", "aprendizado": false, "areas": {"av": "gravar", "redes": false, "design": false, "fotografia": true, "jornalismo": false}, "disp": {"t_fju_sab": true, "t_fju_seg": true}}, {"id": "pmrm3x7l3h5hx", "nome": "Carolyne", "local": "Catedral", "obs": "Auxiliar da Catedral\nFalta ser atendida por BH", "aprendizado": false, "areas": {"av": "gravar", "redes": false, "design": false, "fotografia": true, "jornalismo": true}, "disp": {"t_fju_sab": true, "t_fju_seg": true}}, {"id": "pmrm3xzi4lbby", "nome": "Pablo", "local": "Catedral", "obs": "Já foi atendido mas ainda está sendo observado pelo pastor pra liberação", "aprendizado": false, "areas": {"av": "gravar", "redes": false, "design": true, "fotografia": true, "jornalismo": false}, "disp": {"t_fju_sab": true, "t_fju_seg": true}}, {"id": "pmrm3yl8aikt9", "nome": "Laiz", "local": "Catedral", "obs": "Falta ser atendida ainda para liberação das próximas reuniões e praticar mais", "aprendizado": false, "areas": {"av": "gravar", "redes": false, "design": false, "fotografia": true, "jornalismo": false}, "disp": {"t_fju_sab": true, "t_fju_seg": true}}, {"id": "pmrm43d8n891n", "nome": "Kátia FTU", "local": "Catedral", "obs": "Precisa aprender ainda como realizar o trabalho até liberação para trabalhar solo", "aprendizado": true, "areas": {"av": "gravar", "redes": false, "design": false, "fotografia": true, "jornalismo": false}, "disp": {"t_reu_dom": true, "t_reu_qui": true}}, {"id": "pmrm442e7sf9c", "nome": "Obreira Fernanda", "local": "Catedral", "obs": "Grupo Calebe", "aprendizado": false, "areas": {"av": "gravar", "redes": false, "design": false, "fotografia": true, "jornalismo": false}, "disp": {"tmrm3sthqb8h": true}}, {"id": "pmrm453wfjasd", "nome": "Obreira Lidiane", "local": "Catedral", "obs": "Precisa aprender ainda como realizar o trabalho até liberação para trabalhar solo", "aprendizado": true, "areas": {"av": "gravar", "redes": false, "design": false, "fotografia": true, "jornalismo": false}, "disp": {"t_reu_dom": true}}, {"id": "pmrm45jp6f2ov", "nome": "Obreira Patrícia", "local": "Catedral", "obs": "Precisa aprender ainda como realizar o trabalho até liberação para trabalhar solo", "aprendizado": true, "areas": {"av": "gravar", "redes": false, "design": false, "fotografia": true, "jornalismo": false}, "disp": {"t_reu_dom": true}}, {"id": "pmrm46vqtgone", "nome": "Talita", "local": "Catedral", "obs": "Precisa aprender ainda como realizar o trabalho até liberação para trabalhar solo", "aprendizado": true, "areas": {"av": "gravar", "redes": false, "design": false, "fotografia": true, "jornalismo": false}, "disp": {"tmrm3sthqb8h": true}}, {"id": "pmrm48o0i4k6e", "nome": "Ulisses", "local": "Catedral", "obs": "Ajuda em edições no geral mas não consegue ajudar diretamente nas reuniões", "aprendizado": false, "areas": {"av": "ambos", "redes": false, "design": true, "fotografia": true, "jornalismo": false}, "disp": {}}];
+function defaultTurnos(){ return JSON.parse(JSON.stringify(SEED_TURNOS)); }
 function newAreas(){ return {jornalismo:false,fotografia:false,design:false,redes:false,av:'nao'}; }
 
 /* cache local (para ver offline) */
@@ -292,24 +287,21 @@ const $$ = s=>Array.from(document.querySelectorAll(s));
 const uid = ()=>'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 const tuid = ()=>'t'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
 const labelOf = t=> t.nome + (t.hora?(' ('+t.hora+')'):'');
-const allTurnos = ()=> [...turnos.fju, ...turnos.reuniao];
+const allTurnos = ()=> turnos;
 const canEdit = ()=> Auth.logged();
 function areasText(p){ const a=p.areas||{}; const out=[]; AREAS.forEach(x=>{ if(a[x.k]) out.push(x.l); }); if(a.av&&a.av!=='nao') out.push('Áudio Visual ('+AV_LABEL[a.av]+')'); return out; }
-function dayTags(p){ const out=[]; turnos.fju.forEach(t=>{ if(p.disp?.[t.id]) out.push({t:'FJU: '+SHORT[t.dow],c:''}); }); turnos.reuniao.forEach(t=>{ if(p.disp?.[t.id]) out.push({t:'Reunião: '+SHORT[t.dow],c:'reu'}); }); return out; }
-
-async function boot(){
-  await Auth.restore();
-  await loadData();
-  buildModalStatics(); bindEvents();
-  const d=new Date(); $('#genMonth').value=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
-  applyMode(); renderAll();
-}
+function dayTags(p){ return turnos.filter(t=>p.disp?.[t.id]).map(t=>({t:SHORT[t.dow]+' '+(t.hora||''), c:t.dow===6?'':'reu'})); }
 async function loadData(){
   let data=null;
   try{ data=await DB.load(); if(data) LS.set('escala_dados', JSON.stringify(data)); setSave('cloud'); }
   catch(e){ const raw=LS.get('escala_dados'); if(raw){ try{ data=JSON.parse(raw); }catch(_){} } }
-  if(data){ pessoas=(data.pessoas||[]).map(normalizePerson); turnos=(data.turnos&&data.turnos.fju)?data.turnos:defaultTurnos(); }
-  else { pessoas=[]; turnos=defaultTurnos(); }
+  if(data){ pessoas=(data.pessoas||[]).map(normalizePerson); turnos=normalizeTurnos(data.turnos); }
+  else { pessoas=JSON.parse(JSON.stringify(SEED_PESSOAS)); turnos=defaultTurnos(); }
+}
+function normalizeTurnos(t){
+  if(Array.isArray(t) && t.length) return t;
+  if(t && (t.fju||t.reuniao)) return [...(t.fju||[]), ...(t.reuniao||[])]; // migra formato antigo
+  return defaultTurnos();
 }
 function normalizePerson(p){ return { id:p.id||uid(), nome:p.nome||'', local:p.local||'', obs:p.obs||'', aprendizado:!!p.aprendizado, areas:p.areas||{jornalismo:false,fotografia:!!p.foto,design:false,redes:false,av:(p.video?'gravar':'nao')}, disp:p.disp||{} }; }
 async function persist(){
@@ -348,8 +340,7 @@ function bindEvents(){
   $('#q').oninput=e=>{ filters.q=e.target.value.toLowerCase(); renderPeople(); };
   $$('#filters .chip-toggle').forEach(c=> c.onclick=()=>{ const f=c.dataset.filter; if(filters.set.has(f)) filters.set.delete(f); else filters.set.add(f); c.classList.toggle('on',filters.set.has(f)); renderPeople(); });
   $('#genMonth').onchange=updatePrompts;
-  $('#copyReu').onclick=()=>copyText($('#promptReu').textContent,'Prompt das Reuniões copiado');
-  $('#copyFju').onclick=()=>copyText($('#promptFju').textContent,'Prompt da FJU copiado');
+  $('#copyPrompt').onclick=()=>copyText($('#promptOut').textContent,'Prompt copiado');
   $('#fileImport').onchange=importData;
   // login
   $('#authBtn').onclick=()=>{ if(canEdit()){ if(confirm('Sair da conta? O app volta para o modo visualização.')){ Auth.signOut(); applyMode(); toast('Você saiu'); } } else openLogin(); };
@@ -374,16 +365,18 @@ async function doLogin(){
 
 function switchTab(name){
   $$('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===name));
-  ['pessoas','fju','reuniao','gerar','config'].forEach(v=>$('#view-'+v).classList.toggle('hidden',v!==name));
-  if(name==='fju') renderDayView('fju');
-  if(name==='reuniao') renderDayView('reuniao');
+  ['pessoas','dias','gerar','config'].forEach(v=>$('#view-'+v).classList.toggle('hidden',v!==name));
+  if(name==='dias') renderDayView();
   if(name==='gerar') updatePrompts();
   if(name==='config') renderConfig();
 }
 
 function buildPickers(){
-  const build=(base,wrap)=>{ wrap.innerHTML=''; turnos[base].forEach(t=>{ const el=document.createElement('div'); el.className='pick'; el.dataset.slot=t.id; el.innerHTML='<span class="cbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span>'+labelOf(t); el.onclick=()=>{ draft.disp[t.id]=!draft.disp[t.id]; if(draft.disp[t.id]){ allTurnos().forEach(o=>{ if(o.id!==t.id&&o.dow===t.dow&&o.hora===t.hora&&draft.disp[o.id]){ draft.disp[o.id]=false; const oe=$('.pick[data-slot="'+o.id+'"]'); if(oe) oe.classList.remove('on'); toast('Mesmo dia/horário: escolha só um'); } }); } el.classList.toggle('on',draft.disp[t.id]); }; wrap.appendChild(el); }); };
-  build('fju',$('#pickFju')); build('reuniao',$('#pickReu'));
+  const wrap=$('#pickDias'); wrap.innerHTML='';
+  turnos.forEach(t=>{ const el=document.createElement('div'); el.className='pick'; el.dataset.slot=t.id;
+    el.innerHTML='<span class="cbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span>'+labelOf(t);
+    el.onclick=()=>{ draft.disp[t.id]=!draft.disp[t.id]; el.classList.toggle('on',draft.disp[t.id]); };
+    wrap.appendChild(el); });
 }
 function openModal(person){
   editingId=person?person.id:null;
@@ -431,58 +424,83 @@ function renderPeople(){
 window.editById=id=>{ if(canEdit()) openModal(pessoas.find(p=>p.id===id)); };
 window.deletePerson=id=>{ if(canEdit()) deletePerson(id); };
 
-function renderDayView(base){
-  const view=$('#view-'+base); const title=base==='fju'?'Disponíveis para a FJU':'Disponíveis para as Reuniões';
-  let html='<div class="section-label">'+title+'</div>';
-  if(turnos[base].length===0){ view.innerHTML=html+emptyState('Nenhum dia configurado', canEdit()?'Vá em Configurações e adicione os dias.':'Sem dias configurados.'); return; }
+function renderDayView(){
+  const view=$('#view-dias');
+  let html='<div class="section-label">Quem pode ajudar em cada dia</div>';
+  if(turnos.length===0){ view.innerHTML=html+emptyState('Nenhum dia configurado', canEdit()?'Vá em Configurações e adicione os dias.':'Sem dias configurados.'); return; }
   html+='<div class="slot-grid">';
-  turnos[base].forEach(t=>{ const people=pessoas.filter(p=>p.disp?.[t.id]); const ativos=people.filter(p=>!p.aprendizado).length;
+  turnos.forEach(t=>{ const people=pessoas.filter(p=>p.disp?.[t.id]); const ativos=people.filter(p=>!p.aprendizado).length;
     html+='<div class="slot"><h4>'+esc(labelOf(t))+'<span class="count">'+ativos+' na escala</span></h4><div class="who">'+
       (people.length? people.map(p=>{ const ar=areasText(p); return '<div class="who-row'+(p.aprendizado?' learn':'')+'">'+esc(p.nome)+(p.aprendizado?' · aprendizado':'')+'<span class="aro">'+esc(ar.slice(0,2).join(', '))+'</span></div>'; }).join('') : '<div class="who-row" style="color:var(--muted)">Ninguém disponível ainda</div>')+
       '</div></div>'; });
   view.innerHTML=html+'</div>';
 }
 
-function updatePrompts(){ $('#promptReu').textContent=gerarPrompt('reuniao'); $('#promptFju').textContent=gerarPrompt('fju'); }
-function endingFor(base){
-  const falta='📌 (Obs: CASO TIVER QUE FALTAR, FAVOR AVISAR COM ANTECEDÊNCIA.)'; const antes='(SE ESFORÇAR PRA CHEGAR PELO MENOS 20 MINUTOS ANTES.)';
-  if(base==='reuniao') return [falta,'Uniforme: todo preto.','• Domingos: calça e sapato social, com blusa preta neutra.','• Demais dias: tênis preto e calça jeans 100% preta, com blusa preta neutra.','Não usar a Blusa do Mídia nas reuniões (ela é só da FJU).','NAS REUNIÕES DE DOMINGO, TODOS OS MÍDIAS PRESENTES DEVEM AJUDAR A PEGAR O TERMO DAS PESSOAS QUE DEREM OS TESTEMUNHOS.',antes].join('\n');
-  return [falta,'Uniforme correto: Blusa do Mídia, calça preta e sapato preto. (Meninas: opcional o uso de colete preto.)','Não pode usar blusa toda preta, apenas no caso de quem ainda não tem a camisa.',antes].join('\n');
+function updatePrompts(){ const el=$('#promptOut'); if(el) el.textContent=gerarPrompt(); }
+function rodape(){
+  return ['📌 (Obs: CASO TIVER QUE FALTAR, FAVOR AVISAR COM ANTECEDÊNCIA.)',
+  'Uniforme correto: Blusa do Mídia, calça preta e sapato preto.(Meninas) Opcional o uso de colete preto.',
+  'Não pode usar blusa toda preta, apenas no caso de quem ainda não tem a camisa.',
+  'NAS REUNIÕES DE DOMINGO TODOS OS MÍDIAS QUE ESTIVEREM PRESENTES, DEVEM AJUDAR PEGAR O TERMO DAS PESSOAS QUE DEREM OS TESTEMUNHOS.',
+  '(SE ESFORÇAR PRA CHEGAR PELO MENOS 20 MINUTOS ANTES)'].join('\n');
 }
-function gerarPrompt(base){
-  const titulo=base==='fju'?'FJU':'REUNIÕES'; const lista=turnos[base];
+function gerarPrompt(){
   const mv=($('#genMonth').value||''); let mesNome='{MÊS/ANO}', primeiro='{MÊS}';
   if(mv){ const [y,m]=mv.split('-').map(Number); mesNome=new Date(y,m-1,1).toLocaleDateString('pt-BR',{month:'long',year:'numeric'}); primeiro=mesNome.split(' ')[0].replace(/^./,c=>c.toUpperCase()); }
-  const ids=lista.map(t=>t.id); const roster=pessoas.filter(p=>!p.aprendizado && ids.some(id=>p.disp?.[id]));
-  const rosterTxt = roster.length ? roster.map(p=>{ const dias=lista.filter(t=>p.disp?.[t.id]).map(t=>labelOf(t)).join('; '); const ar=areasText(p); const obs=p.obs?'  (obs: '+p.obs+')':''; return '- '+p.nome+'  |  pode ajudar em: '+dias+'  |  áreas: '+(ar.length?ar.join(', '):'—')+obs; }).join('\n') : '(nenhuma pessoa disponível para esta base)';
-  const turnosTxt=lista.map(t=>'- '+labelOf(t)).join('\n') || '(nenhum dia configurado)';
-  const modelo=lista.map(t=>'⚠ '+labelOf(t)+':\n'+t.mark+' {DD/MM}: {nome}\n(repita uma linha para CADA data desse dia no mês)').join('\n\n');
-  const regras=['1. Escale cada pessoa SOMENTE nos dias em que ela está disponível. Nunca escale fora da disponibilidade.','2. Uma pessoa por data.','3. A mesma pessoa NÃO pode se repetir no mesmo dia da semana em duas ocorrências seguidas (ex.: 2 quartas ou 2 domingos seguidos). Intercalar é permitido.','4. Divida de forma justa: a diferença de escalas entre as pessoas deve ser de no máximo 1. Não sobrecarregue ninguém.','5. Se for impossível respeitar a regra 3, preencha a data mesmo assim e sinalize a exceção entre parênteses — nunca deixe vazio.','6. Calcule as DATAS REAIS de cada dia no mês, formato DD/MM.','7. Devolva SEMPRE exatamente no formato abaixo, sem comentários extras — para ficar padronizado todos os meses.'].join('\n');
-  return ['Você vai montar a escala mensal da equipe de mídia — '+titulo+'.','Pessoas em aprendizado já foram removidas e não devem ser escaladas.','','MÊS DE REFERÊNCIA: '+mesNome,'','DIAS E HORÁRIOS:',turnosTxt,'','EQUIPE DISPONÍVEL:',rosterTxt,'','REGRAS:',regras,'','FORMATO DE SAÍDA — siga EXATAMENTE este modelo (mantenha os emojis):','Escala Mês '+primeiro,'',modelo,'',endingFor(base)].join('\n');
+  const roster=pessoas.filter(p=>!p.aprendizado && turnos.some(t=>p.disp?.[t.id]));
+  const rosterTxt = roster.length ? roster.map(p=>{
+    const dias=turnos.filter(t=>p.disp?.[t.id]).map(t=>labelOf(t)).join('; ');
+    const ar=areasText(p); const obs=p.obs?'  (obs: '+String(p.obs).replace(/\n/g,' / ')+')':'';
+    return '- '+p.nome+'  |  pode ajudar em: '+dias+'  |  áreas: '+(ar.length?ar.join(', '):'—')+obs;
+  }).join('\n') : '(nenhuma pessoa disponível — cadastre pessoas e marque os dias)';
+  const turnosTxt = turnos.length ? turnos.map(t=>'- '+labelOf(t)+' — toda '+DOW[t.dow]).join('\n') : '(nenhum dia configurado)';
+  const modelo = turnos.map(t=>{
+    const hora = (t.dow===0) ? (t.hora?t.hora+' - ':'') : '';
+    return '⚠ '+labelOf(t)+':\n'+t.mark+' {DD/MM}: '+hora+'{nome}\n(uma linha para CADA data desse dia dentro do mês)';
+  }).join('\n');
+  const regras=[
+    '1. Escale cada pessoa SOMENTE nos dias em que ela está disponível (lista acima). Nunca escale fora da disponibilidade.',
+    '2. Uma pessoa por data.',
+    '3. A mesma pessoa NÃO pode se repetir no mesmo dia da semana em duas ocorrências seguidas. Ex.: se serviu numa quarta, não pode na quarta da semana seguinte (pode voltar na outra). Vale para todos os dias. Intercalar é permitido e desejado.',
+    '4. Divida de forma justa: a diferença de escalas entre as pessoas deve ser de no máximo 1 no mês. Não pese em ninguém.',
+    '5. Se for impossível respeitar a regra 3 (poucas pessoas disponíveis no dia), preencha a data mesmo assim e sinalize a exceção entre parênteses — nunca deixe vazio.',
+    '6. Calcule as DATAS REAIS de cada dia da semana dentro do mês informado. Formato DD/MM.',
+    '7. Devolva SOMENTE a escala no formato abaixo, sem comentários extras, para ficar padronizada todo mês.'
+  ].join('\n');
+  return [
+    'Monte a escala mensal da equipe de mídia.',
+    'Pessoas em aprendizado já foram removidas da lista e não devem ser escaladas.','',
+    'MÊS DE REFERÊNCIA: '+mesNome,'',
+    'DIAS E HORÁRIOS:',turnosTxt,'',
+    'EQUIPE DISPONÍVEL:',rosterTxt,'',
+    'REGRAS:',regras,'',
+    'FORMATO DE SAÍDA — siga EXATAMENTE este modelo, trocando só nomes e datas (mantenha os emojis):','',
+    'Escala Mês '+primeiro,modelo,'',rodape()
+  ].join('\n');
 }
 async function copyText(txt,msg){ try{ await navigator.clipboard.writeText(txt); toast(msg); }catch(e){ const ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); toast(msg); }catch(_){ toast('Selecione o texto e copie'); } ta.remove(); } }
 
 function renderConfig(){
   const box=$('#view-config');
   box.innerHTML = '<div class="section-label">Dias e horários</div>'+
-    '<p class="cfg-note">Edite nome, dia da semana e horário de cada turno. Muda o cadastro, as visões e os prompts.</p>'+
-    turnoEditor('fju','FJU')+turnoEditor('reuniao','Reuniões')+
+    '<p class="cfg-note">Edite nome, dia da semana, horário e marcador de cada turno. Muda o cadastro, a aba de dias e o prompt.</p>'+
+    turnoEditor()+
     '<div class="section-label" style="margin-top:26px">Backup</div>'+
-    '<div class="cfg-card"><h4>Backup em arquivo</h4><p>Baixe um arquivo com tudo e guarde (Drive). Serve de garantia extra além da nuvem.</p>'+
+    '<div class="cfg-card"><h4>Backup em arquivo</h4><p>Baixe um arquivo com tudo e guarde (Drive). Garantia extra além da nuvem.</p>'+
     '<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" onclick="exportData()">Baixar backup (.json)</button><button class="btn" onclick="document.getElementById(\'fileImport\').click()">Restaurar backup</button></div></div>';
   box.addEventListener('change', onConfigChange);
 }
-function turnoEditor(base,titulo){
-  const rows=turnos[base].map(t=>'<div class="trow" data-base="'+base+'" data-id="'+t.id+'"><input class="tnome" value="'+esc(t.nome)+'" placeholder="Nome do turno"><select class="tdow">'+DOW.map((d,i)=>'<option value="'+i+'"'+(i===t.dow?' selected':'')+'>'+d+'</option>').join('')+'</select><input class="thora" value="'+esc(t.hora)+'" placeholder="19h"><select class="tmark">'+MARKS.map(m=>'<option'+(m===t.mark?' selected':'')+'>'+m+'</option>').join('')+'</select><button class="btn danger sm tdel" onclick="removeTurno(\''+base+'\',\''+t.id+'\')">Remover</button></div>').join('');
-  return '<div class="cfg-card"><h4>'+titulo+'</h4>'+(rows||'<p style="margin:0 0 10px">Nenhum turno ainda.</p>')+'<button class="btn sm" style="margin-top:6px" onclick="addTurno(\''+base+'\')">+ Adicionar dia</button></div>';
+function turnoEditor(){
+  const rows=turnos.map(t=>'<div class="trow" data-id="'+t.id+'"><input class="tnome" value="'+esc(t.nome)+'" placeholder="Nome do turno"><select class="tdow">'+DOW.map((d,i)=>'<option value="'+i+'"'+(i===t.dow?' selected':'')+'>'+d+'</option>').join('')+'</select><input class="thora" value="'+esc(t.hora)+'" placeholder="19h"><select class="tmark">'+MARKS.map(m=>'<option'+(m===t.mark?' selected':'')+'>'+m+'</option>').join('')+'</select><button class="btn danger sm tdel" onclick="removeTurno(\''+t.id+'\')">Remover</button></div>').join('');
+  return '<div class="cfg-card"><h4>Dias de Reunião/FJU</h4>'+(rows||'<p style="margin:0 0 10px">Nenhum turno ainda.</p>')+'<button class="btn sm" style="margin-top:6px" onclick="addTurno()">+ Adicionar dia</button></div>';
 }
-function readTurnosFromDom(){ ['fju','reuniao'].forEach(base=>{ turnos[base]=$$('.trow[data-base="'+base+'"]').map(r=>({ id:r.dataset.id, nome:r.querySelector('.tnome').value.trim()||'Sem nome', dow:parseInt(r.querySelector('.tdow').value), hora:r.querySelector('.thora').value.trim(), mark:r.querySelector('.tmark').value })); }); }
+function readTurnosFromDom(){ turnos=$$('.trow').map(r=>({ id:r.dataset.id, nome:r.querySelector('.tnome').value.trim()||'Sem nome', dow:parseInt(r.querySelector('.tdow').value), hora:r.querySelector('.thora').value.trim(), mark:r.querySelector('.tmark').value })); }
 async function onConfigChange(e){ if(e.target.closest('.trow')){ readTurnosFromDom(); await persist(); updatePrompts(); } }
-window.addTurno=async base=>{ readTurnosFromDom(); turnos[base].push({id:tuid(),nome:'',dow:0,hora:'19h',mark:'⬛'}); await persist(); renderConfig(); };
-window.removeTurno=async (base,id)=>{ readTurnosFromDom(); turnos[base]=turnos[base].filter(t=>t.id!==id); await persist(); renderConfig(); updatePrompts(); toast('Dia removido'); };
+window.addTurno=async ()=>{ readTurnosFromDom(); turnos.push({id:tuid(),nome:'',dow:0,hora:'19h',mark:'⬛'}); await persist(); renderConfig(); };
+window.removeTurno=async (id)=>{ readTurnosFromDom(); turnos=turnos.filter(t=>t.id!==id); await persist(); renderConfig(); updatePrompts(); toast('Dia removido'); };
 
 window.exportData=()=>{ const blob=new Blob([JSON.stringify({app:'escala-obra',v:5,pessoas,turnos},null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='escala-backup.json'; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000); toast('Backup baixado'); };
-function importData(e){ const file=e.target.files[0]; if(!file) return; const rd=new FileReader(); rd.onload=async()=>{ try{ const obj=JSON.parse(rd.result); const arr=Array.isArray(obj)?obj:obj.pessoas; if(!Array.isArray(arr)) throw 0; pessoas=arr.map(normalizePerson); if(obj.turnos&&obj.turnos.fju) turnos=obj.turnos; await persist(); renderAll(); updatePrompts(); if(!$('#view-config').classList.contains('hidden')) renderConfig(); toast('Backup restaurado'); }catch(err){ toast('Arquivo inválido'); } e.target.value=''; }; rd.readAsText(file); }
+function importData(e){ const file=e.target.files[0]; if(!file) return; const rd=new FileReader(); rd.onload=async()=>{ try{ const obj=JSON.parse(rd.result); const arr=Array.isArray(obj)?obj:obj.pessoas; if(!Array.isArray(arr)) throw 0; pessoas=arr.map(normalizePerson); if(obj.turnos) turnos=normalizeTurnos(obj.turnos); await persist(); renderAll(); updatePrompts(); if(!$('#view-config').classList.contains('hidden')) renderConfig(); toast('Backup restaurado'); }catch(err){ toast('Arquivo inválido'); } e.target.value=''; }; rd.readAsText(file); }
 
 function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 function emptyState(t,s){ return '<div class="empty" style="grid-column:1/-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.5 3-6 7-6s7 2.5 7 6"/><circle cx="18" cy="9" r="2.5"/><path d="M17 14c3 .3 5 2.4 5 6"/></svg><h3>'+t+'</h3><div>'+s+'</div></div>'; }
