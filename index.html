@@ -407,7 +407,7 @@ async function savePerson(){
   if(editingId){ Object.assign(pessoas.find(x=>x.id===editingId),data); } else { pessoas.push({id:uid(),...data}); }
   await persist(); closeModal(); renderAll(); updatePrompts(); toast(editingId?'Pessoa atualizada':'Pessoa adicionada');
 }
-async function deletePerson(id){ const p=pessoas.find(x=>x.id===id); if(!confirm('Remover "'+p.nome+'" do cadastro?')) return; pessoas=pessoas.filter(x=>x.id!==id); await persist(); renderAll(); updatePrompts(); toast('Pessoa removida'); }
+async function doDelete(id){ const p=pessoas.find(x=>x.id===id); if(!p) return; if(!confirm('Remover "'+p.nome+'" do cadastro?')) return; pessoas=pessoas.filter(x=>x.id!==id); await persist(); renderAll(); updatePrompts(); toast('Pessoa removida'); }
 
 function renderAll(){ $('#cntPessoas').textContent=pessoas.length; renderPeople(); }
 function matchesFilter(p){
@@ -433,7 +433,7 @@ function renderPeople(){
   }).join('');
 }
 window.editById=id=>{ if(canEdit()) openModal(pessoas.find(p=>p.id===id)); };
-window.deletePerson=id=>{ if(canEdit()) deletePerson(id); };
+window.deletePerson=id=>{ if(canEdit()) doDelete(id); };
 
 function renderDayView(){
   const view=$('#view-dias');
