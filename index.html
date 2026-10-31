@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Escala da Obra</title>
+<title>Mídia FJU</title>
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#1f2c48">
@@ -175,9 +175,43 @@
   .esc-row.warn{background:var(--amber-soft)} .esc-row.warn .esc-flag{color:var(--amber)}
   .esc-row.bad{background:var(--rose-soft)} .esc-row.bad .esc-flag{color:var(--rose)}
   .esc-ant{margin-bottom:16px} .esc-ant summary{cursor:pointer; font-weight:700; font-size:.92rem}
-  .esc-ant .trow2{display:flex; gap:10px; align-items:center; margin-top:8px; flex-wrap:wrap} .esc-ant .trow2 span{min-width:190px; font-size:.86rem; font-weight:600}
+  .esc-ant .trow2{display:flex; gap:10px; align-items:center; margin-top:8px; flex-wrap:wrap} .esc-ant .trow2 span{flex:0 0 220px; font-size:.86rem; font-weight:600}
   .prompt-details{margin-top:8px} .prompt-details > summary{cursor:pointer; font-weight:700; color:var(--muted); font-size:.88rem; margin-bottom:12px}
   @media (max-width:640px){ .esc-flag{padding-left:0} }
+  .irow{display:grid; grid-template-columns:1.6fr 1.2fr auto; gap:8px; align-items:center; margin-bottom:8px}
+  .irow input, .irow select, .prod-func-in{font-family:inherit; font-size:.86rem; padding:8px 9px; border:1px solid var(--line); border-radius:9px; background:var(--card); color:var(--ink); width:100%}
+  .prod-func-in{margin-top:8px; resize:vertical; line-height:1.4}
+  .prod-pick{display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:8px; margin-top:12px}
+  .prod-sels{flex:1; display:flex; gap:6px; flex-wrap:wrap; min-width:180px} .prod-sels .esc-sel{min-width:120px}
+  .prod-func{width:100%; font-size:.78rem; color:var(--muted); padding-left:84px; margin-top:-2px}
+  .subseg{margin-bottom:18px; flex-wrap:wrap}
+  label.field select{font-family:inherit; font-size:.95rem; color:var(--ink); padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:var(--card); font-weight:500}
+  .ighead{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+  .ighead .inome{flex:1 1 200px} .ighead .itipo{flex:0 1 230px}
+  .ighead input, .ighead select, .vrow input, .vrow select{font-family:inherit; font-size:.86rem; padding:8px 9px; border:1px solid var(--line); border-radius:9px; background:var(--card); color:var(--ink); min-width:0}
+  .igtitulo{margin:0; flex:1 1 200px; font-size:1rem}
+  .igcount{font-size:.8rem; color:var(--muted); font-weight:600}
+  .igbody{margin-top:14px; padding-top:14px; border-top:1px solid var(--line)}
+  .mgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:10px}
+  .mcard{border:1px solid var(--line); border-radius:12px; padding:11px 12px; background:var(--bg); display:flex; flex-direction:column; gap:6px}
+  .mcard.cpm{border-color:var(--amber)}
+  .mcard .foot{display:flex; gap:4px; margin-top:auto; padding-top:6px; border-top:1px solid var(--line)}
+  .tg.cpm{background:var(--amber-soft); color:var(--amber)} .tg.midia{background:var(--teal-soft); color:var(--teal)}
+  .mdates{font-size:.78rem; color:var(--muted)}
+  .sem-missao{flex:1 1 100%; max-width:calc(100% - 84px); margin-left:84px}
+  .vrow{display:grid; grid-template-columns:1.4fr 1.2fr 70px auto; gap:8px; align-items:center; margin-bottom:8px}
+  .vrow input, .vrow select{width:100%}
+  .vig-form{display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px}
+  .pres-grupo{margin-top:12px} .pres-grupo h5{margin:0; font-size:.88rem; display:flex; gap:8px; align-items:center}
+  .pres-pick{grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); margin-top:6px}
+  .pres-pick .pick small{margin-left:auto; font-size:.7rem; font-weight:700; color:var(--amber)}
+  .vchips{display:flex; flex-wrap:wrap; gap:6px; align-items:center}
+  .vchip{display:inline-flex; gap:4px; align-items:center; background:var(--plum-soft); color:var(--plum); font-weight:650; font-size:.85rem; padding:4px 10px; border-radius:20px}
+  .vchip.cpm{background:var(--amber-soft); color:var(--amber)}
+  .vchip button{border:0; background:none; color:inherit; cursor:pointer; font-size:.8rem; padding:0 2px 0 4px; font-family:inherit}
+  .vfalta{font-size:.76rem; font-weight:700; color:var(--amber); margin-top:8px}
+  @media (max-width:640px){ .sem-missao{max-width:100%; margin-left:0} .vrow{grid-template-columns:1fr 1fr} }
+  @media (max-width:640px){ .prod-func{padding-left:0} .irow{grid-template-columns:1fr} }
   .hidden{display:none!important}
   @media (max-width:640px){ .trow{grid-template-columns:1fr 1fr} .trow .tdel{grid-column:1/-1} .slots-pick,.checklist{grid-template-columns:1fr} }
 </style>
@@ -186,7 +220,7 @@
   <div class="top">
     <div class="brand">
       <img class="mark" src="favicon.png" alt="Mídia FJU">
-      <div><h1>Escala da Obra</h1><div class="sub">Ajudantes de mídia — FJU &amp; Reuniões</div></div>
+      <div><h1>Mídia FJU</h1><div class="sub">Escala da equipe e das igrejas</div></div>
     </div>
     <div class="top-actions">
       <span class="savepill cloud hidden" id="savePill"><span class="d"></span><span id="saveTxt">salvo na nuvem</span></span>
@@ -200,19 +234,19 @@
   <div class="tabs" id="tabs">
     <button class="tab active" data-tab="pessoas">Pessoas <span class="pill" id="cntPessoas">0</span></button>
     <button class="tab" data-tab="dias">Dias de Reunião/FJU</button>
+    <button class="tab" data-tab="igrejas">Igrejas <span class="pill" id="cntIgrejas">0</span></button>
     <button class="tab" data-tab="gerar">Escala do mês</button>
     <button class="tab hidden" id="tabConfig" data-tab="config">Configurações</button>
   </div>
 
   <div id="view-pessoas">
     <div class="toolbar">
-      <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input id="q" placeholder="Buscar por nome ou local…"></div>
+      <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input id="q" placeholder="Buscar por nome…"></div>
       <div class="filters" id="filters">
         <button class="chip-toggle" data-filter="jornalismo">Jornalismo</button>
         <button class="chip-toggle" data-filter="fotografia">Fotografia</button>
         <button class="chip-toggle" data-filter="av">Áudio Visual</button>
         <button class="chip-toggle" data-filter="design">Design</button>
-        <button class="chip-toggle" data-filter="redes">Redes Sociais</button>
         <button class="chip-toggle learn" data-filter="aprendizado">Em aprendizado</button>
       </div>
     </div>
@@ -221,13 +255,15 @@
 
   <div id="view-dias" class="hidden"></div>
 
+  <div id="view-igrejas" class="hidden"></div>
+
   <div id="view-gerar" class="hidden">
     <div class="gen-config">
       <label class="field" style="max-width:220px">Mês / Ano da escala<input type="month" id="genMonth"></label>
-      <p class="hint">O app monta a escala sozinho seguindo as regras: só quem está disponível, uma pessoa por data, ninguém repete o mesmo dia em semanas seguidas (nem na virada do mês) e divisão justa. Quem está <strong>em aprendizado</strong> não entra. Dá para trocar qualquer nome antes de salvar.</p>
+      <p class="hint" id="genHint">O app monta a escala sozinho seguindo as regras: só quem está disponível, uma pessoa por data, ninguém repete o mesmo dia em semanas seguidas (nem na virada do mês) e divisão justa. Quem está <strong>em aprendizado</strong> não entra. Dá para trocar qualquer nome antes de salvar.</p>
     </div>
     <div id="escalaBox"></div>
-    <details class="prompt-details"><summary>Prefere montar com uma IA? Ver o prompt</summary>
+    <details class="prompt-details" id="promptDetails"><summary>Prefere montar com uma IA? Ver o prompt</summary>
     <div class="prompt-card"><div class="ph"><h3>Prompt da escala</h3><button class="btn primary sm" id="copyPrompt">Copiar</button></div><pre class="prompt-body" id="promptOut"></pre></div>
     </details>
   </div>
@@ -240,7 +276,6 @@
     <div class="mhead"><h3 id="modalTitle">Nova pessoa</h3><button class="btn ghost sm" id="btnClose">✕</button></div>
     <div class="mbody">
       <label class="field">Nome<input type="text" id="fNome" placeholder="Ex: João Pedro"></label>
-      <label class="field">Local / congregação<input type="text" id="fLocal" placeholder="Ex: Catedral / Sete Lagoas"></label>
       <div class="learn-switch" id="swLearn">
         <span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span>
         <div><div class="lt">Em aprendizado</div><div class="ls">Fica no cadastro, mas não entra na geração da escala.</div></div>
@@ -257,6 +292,28 @@
       <label class="field">Observações livres<textarea id="fObs" placeholder="Ex: só chega 19h30 / tem câmera própria…"></textarea></label>
     </div>
     <div class="mfoot"><button class="btn ghost" id="btnCancel">Cancelar</button><button class="btn primary" id="btnSave">Salvar</button></div>
+  </div>
+</div>
+
+<div class="overlay" id="igOverlay">
+  <div class="modal">
+    <div class="mhead"><h3 id="mTitle">Nova pessoa da igreja</h3><button class="btn ghost sm" id="mClose">✕</button></div>
+    <div class="mbody">
+      <label class="field">Nome<input type="text" id="mNome" placeholder="Ex: Maria Clara"></label>
+      <label class="field">Igreja<select id="mIgreja"></select></label>
+      <div><div class="blk-t">É mídia ou CPM?</div><div class="avseg" id="papelSeg"></div></div>
+      <div>
+        <div class="blk-t">Áreas que ajuda / sabe</div>
+        <div class="checklist" id="mAreaList"></div>
+        <div class="avrow"><span class="avlbl">Áudio Visual:</span><div class="avseg" id="mAvSeg"></div></div>
+      </div>
+      <div class="vig-form">
+        <label class="field">Entrou no CPM em<input type="date" id="mDataCpm"></label>
+        <label class="field" id="wrapDataMidia">Entrou no Mídia em<input type="date" id="mDataMidia"></label>
+      </div>
+      <label class="field">Observações livres<textarea id="mObs" placeholder="Ex: tem câmera própria…"></textarea></label>
+    </div>
+    <div class="mfoot"><button class="btn ghost" id="mCancel">Cancelar</button><button class="btn primary" id="mSave">Salvar</button></div>
   </div>
 </div>
 
@@ -287,7 +344,7 @@ const FB_DOC = 'https://firestore.googleapis.com/v1/projects/'+FB_PROJECT_ID+'/d
 const DOW = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
 const SHORT = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
 const MARKS = ['⬛','🟥','◻','🟦','🟩','⭐','✅'];
-const AREAS = [ {k:'jornalismo',l:'Jornalismo'},{k:'fotografia',l:'Fotografia'},{k:'design',l:'Design'},{k:'redes',l:'Redes Sociais'} ];
+const AREAS = [ {k:'jornalismo',l:'Jornalismo'},{k:'fotografia',l:'Fotografia'},{k:'design',l:'Design'} ];
 const AV_OPTS = [['nao','Não'],['gravar','Gravar'],['editar','Editar'],['ambos','Ambos']];
 const AV_LABEL = {gravar:'gravar', editar:'editar', ambos:'gravar e editar'};
 
@@ -335,6 +392,7 @@ const DB = {
 let pessoas=[], turnos=defaultTurnos(), editingId=null;
 let escalas={};      // escalas salvas por mês: {'2026-11': {slots:[{data,turno,pessoa}], anterior:{}, atualizado_em}}
 let rascunho=null;   // escala que está na tela (pode ainda não estar salva)
+let igrejas=[], producao=null, escalasProd={}, escalasSemana={}, vigilia=null; // igrejas, missões da semana e vigília
 let draft={aprendizado:false, areas:newAreas(), disp:{}};
 let filters={q:'', set:new Set()};
 
@@ -352,7 +410,7 @@ function dayTags(p){ return turnos.filter(t=>p.disp?.[t.id]).map(t=>({t:SHORT[t.
 async function boot(){
   await Auth.restore();
   await loadData();
-  buildModalStatics(); bindEvents();
+  buildModalStatics(); buildMembroModal(); bindEvents();
   const d=new Date(); if(d.getDate()>=20) d.setMonth(d.getMonth()+1,1); // a partir do dia 20 já abre o mês seguinte
   $('#genMonth').value=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
   applyMode(); renderAll(); updatePrompts();
@@ -364,7 +422,11 @@ async function loadData(){
   if(!data){ const raw=LS.get('escala_dados'); if(raw){ try{ data=JSON.parse(raw); }catch(_){} } } // nuvem vazia ou fora do ar: usa o cache
   if(data){ pessoas=(data.pessoas||[]).map(normalizePerson); turnos=normalizeTurnos(data.turnos); escalas=(data.escalas&&typeof data.escalas==='object')?data.escalas:{}; }
   else { pessoas=JSON.parse(JSON.stringify(SEED_PESSOAS)); turnos=defaultTurnos(); escalas={}; }
-  rascunho=null;
+  igrejas=((data&&data.igrejas)||[]).map(normalizeIgreja); producao=normalizeProducao(data&&data.producao);
+  escalasProd=(data&&data.escalasProd&&typeof data.escalasProd==='object')?data.escalasProd:{}; // escala mensal antiga, guardada
+  escalasSemana=(data&&data.escalasSemana&&typeof data.escalasSemana==='object')?data.escalasSemana:{};
+  vigilia=normalizeVigilia(data&&data.vigilia);
+  rascunho=null; rascSem=null; vigRasc=null;
 }
 function normalizeTurnos(t){
   if(Array.isArray(t) && t.length) return t;
@@ -373,7 +435,7 @@ function normalizeTurnos(t){
 }
 function normalizePerson(p){ return { id:p.id||uid(), nome:p.nome||'', local:p.local||'', obs:p.obs||'', aprendizado:!!p.aprendizado, areas:p.areas||{jornalismo:false,fotografia:!!p.foto,design:false,redes:false,av:(p.video?'gravar':'nao')}, disp:p.disp||{} }; }
 async function persist(){
-  const data={pessoas,turnos,escalas}; LS.set('escala_dados', JSON.stringify(data));
+  const data={pessoas,turnos,escalas,igrejas,producao,escalasProd,escalasSemana,vigilia}; LS.set('escala_dados', JSON.stringify(data));
   if(!canEdit()){ return; }
   setSave('saving');
   try{ await DB.save(data); setSave('cloud'); }
@@ -391,6 +453,7 @@ function applyMode(){
   if(!can && !$('#view-config').classList.contains('hidden')) switchTab('pessoas');
   renderPeople();
   if(!$('#view-gerar').classList.contains('hidden')) renderEscala();
+  if(!$('#view-igrejas').classList.contains('hidden')) renderIgrejas();
 }
 
 function buildModalStatics(){
@@ -433,8 +496,9 @@ async function doLogin(){
 
 function switchTab(name){
   $$('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===name));
-  ['pessoas','dias','gerar','config'].forEach(v=>$('#view-'+v).classList.toggle('hidden',v!==name));
+  ['pessoas','dias','igrejas','gerar','config'].forEach(v=>$('#view-'+v).classList.toggle('hidden',v!==name));
   if(name==='dias') renderDayView();
+  if(name==='igrejas') renderIgrejas();
   if(name==='gerar'){ updatePrompts(); renderEscala(); }
   if(name==='config') renderConfig();
 }
@@ -450,7 +514,7 @@ function openModal(person){
   editingId=person?person.id:null;
   draft = person ? {aprendizado:!!person.aprendizado, areas:Object.assign(newAreas(),person.areas||{}), disp:{...(person.disp||{})}} : {aprendizado:false, areas:newAreas(), disp:{}};
   $('#modalTitle').textContent=person?'Editar pessoa':'Nova pessoa';
-  $('#fNome').value=person?.nome||''; $('#fLocal').value=person?.local||''; $('#fObs').value=person?.obs||'';
+  $('#fNome').value=person?.nome||''; $('#fObs').value=person?.obs||'';
   $('#swLearn').classList.toggle('on',draft.aprendizado);
   $$('#areaList .chk').forEach(el=>el.classList.toggle('on',!!draft.areas[el.dataset.area]));
   $$('#avSeg .avopt').forEach(b=>b.classList.toggle('on',b.dataset.av===(draft.areas.av||'nao')));
@@ -460,15 +524,15 @@ function openModal(person){
 function closeModal(){ $('#overlay').classList.remove('show'); }
 async function savePerson(){
   const nome=$('#fNome').value.trim(); if(!nome){ toast('Digite o nome da pessoa'); $('#fNome').focus(); return; }
-  const data={nome, local:$('#fLocal').value.trim(), obs:$('#fObs').value.trim(), aprendizado:draft.aprendizado, areas:{...draft.areas}, disp:{...draft.disp}};
+  const data={nome, obs:$('#fObs').value.trim(), aprendizado:draft.aprendizado, areas:{...draft.areas}, disp:{...draft.disp}};
   if(editingId){ Object.assign(pessoas.find(x=>x.id===editingId),data); } else { pessoas.push({id:uid(),...data}); }
   await persist(); closeModal(); renderAll(); updatePrompts(); toast(editingId?'Pessoa atualizada':'Pessoa adicionada');
 }
 async function doDelete(id){ const p=pessoas.find(x=>x.id===id); if(!p) return; if(!confirm('Remover "'+p.nome+'" do cadastro?')) return; pessoas=pessoas.filter(x=>x.id!==id); await persist(); renderAll(); updatePrompts(); toast('Pessoa removida'); }
 
-function renderAll(){ $('#cntPessoas').textContent=pessoas.length; renderPeople(); }
+function renderAll(){ $('#cntPessoas').textContent=pessoas.length; $('#cntIgrejas').textContent=igrejas.length; renderPeople(); }
 function matchesFilter(p){
-  if(filters.q && !((p.nome+' '+(p.local||'')).toLowerCase().includes(filters.q))) return false;
+  if(filters.q && !(p.nome||'').toLowerCase().includes(filters.q)) return false;
   for(const f of filters.set){ if(f==='aprendizado'){ if(!p.aprendizado) return false; } else if(f==='av'){ if(!p.areas||p.areas.av==='nao'||!p.areas.av) return false; } else { if(!p.areas||!p.areas[f]) return false; } }
   return true;
 }
@@ -480,7 +544,6 @@ function renderPeople(){
   box.innerHTML=list.map(p=>{
     const dts=dayTags(p); const areas=areasText(p);
     return '<div class="pcard'+(p.aprendizado?' learning':'')+'"><div class="head"><div style="min-width:0"><div class="pname">'+esc(p.nome)+'</div>'+
-      (p.local?'<div class="plocal"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>'+esc(p.local)+'</div>':'')+
       '<div class="daytags">'+(dts.length? dts.map(d=>'<span class="dtag'+(d.c?' reu':'')+'">'+esc(d.t)+'</span>').join('') : '<span class="dtag none">sem dia marcado</span>')+'</div>'+
       '</div></div>'+
       (p.aprendizado||areas.length?'<div class="tags">'+(p.aprendizado?learnTag:'')+areas.map(a=>'<span class="tg">'+esc(a)+'</span>').join('')+'</div>':'')+
@@ -690,6 +753,492 @@ function bindEscala(){
   $$('#escalaBox .esc-slot').forEach(el=>el.onchange=()=>{ r.slots[+el.dataset.i].pessoa=el.value||null; r.salvo=false; renderEscala(); });
   $$('#escalaBox .esc-antsel').forEach(el=>el.onchange=()=>{ r.anterior[el.dataset.turno]=el.value||null; if(r.slots) r.salvo=false; renderEscala(); });
 }
+/* ====== MOTOR DAS MISSÕES DA SEMANA (igrejas) ======
+   A semana vai de domingo a sexta. Cada dia recebe uma igreja independente ou uma dupla de pequenas.
+   Regras: 1) todo dia preenchido; 2) a mesma igreja não faz o mesmo dia da semana anterior;
+   3) evita a mesma igreja duas vezes na semana e em dias colados; 4) divisão justa, olhando
+   também as últimas semanas salvas; 5) as duplas de pequenas variam. Sorteia e fica com a melhor. */
+const ORDEM_SEMANA = [0,1,2,3,4,5]; // domingo a sexta
+function semanaDe(dn,dow){ return dn-dow; } // número do domingo daquela semana
+function slotsSemana(domingo,dias){
+  const ativos={}; dias.forEach(d=>ativos[d.dow]=d); const out=[];
+  for(let i=0;i<6;i++){ if(ativos[i]) out.push({data:somaDias(domingo,i), dow:i, funcao:ativos[i].funcao||'', igrejas:[]}); }
+  return out;
+}
+function unidadesProd(igrejas){
+  const ind=igrejas.filter(i=>i.tipo!=='pequena').map(i=>[i.id]);
+  const peq=igrejas.filter(i=>i.tipo==='pequena').map(i=>i.id);
+  const pares=[]; for(let a=0;a<peq.length;a++) for(let b=a+1;b<peq.length;b++) pares.push([peq[a],peq[b]]);
+  if(peq.length===1) pares.push([peq[0]]); // só existe uma pequena: ela entra sozinha (com aviso)
+  return ind.concat(pares);
+}
+function capacidadeProd(igrejas){ // quantos dias por semana dá para cobrir sem repetir igreja
+  const ind=igrejas.filter(i=>i.tipo!=='pequena').length, peq=igrejas.filter(i=>i.tipo==='pequena').length;
+  return ind+Math.floor(peq/2)+(peq===1?1:0);
+}
+function pontuarProd(sl,ctx,tipo,temUnidades,base){
+  let s=0; const ultDow={}, porSemana={}, ultDia={}, cnt={}, paresVistos={};
+  const passo=(x,daCtx)=>{
+    const dn=diaNum(x.data), wk=semanaDe(dn,x.dow);
+    if(!x.igrejas.length){ if(!daCtx && temUnidades) s+=100000; ultDow[x.dow]=[]; return; }
+    const sem=porSemana[wk]||(porSemana[wk]={});
+    x.igrejas.forEach(c=>{
+      if((ultDow[x.dow]||[]).includes(c)) s+=1000;          // mesmo dia na semana anterior
+      if(sem[c]) s+=400;                                     // de novo na mesma semana
+      if(ultDia[c]===dn-1) s+=60;                            // dias colados
+      sem[c]=(sem[c]||0)+1; ultDia[c]=dn;
+      if(!daCtx) cnt[c]=(cnt[c]||0)+1;
+    });
+    const k=x.igrejas.slice().sort().join('+');
+    if(!daCtx){
+      if(x.igrejas.length===1 && tipo[x.igrejas[0]]==='pequena') s+=300; // pequena sozinha
+      if(x.igrejas.length===2 && paresVistos[k]) s+=15;
+    }
+    if(x.igrejas.length===2) paresVistos[k]=1;
+    ultDow[x.dow]=x.igrejas;
+  };
+  ctx.forEach(x=>passo(x,true)); sl.forEach(x=>passo(x,false));
+  const todos=new Set(Object.keys(cnt).concat(Object.keys(base||{})));
+  todos.forEach(c=>{ if(!tipo[c]) return; const v=(cnt[c]||0)+((base&&base[c])||0); s+=(tipo[c]==='pequena'?10:20)*v*v; }); // pequenas pesam metade: entram em dupla
+  return s;
+}
+function gerarProd(vazios,igrejas,ctx,tentativas,base){
+  const uns=unidadesProd(igrejas); const tipo={}; igrejas.forEach(i=>tipo[i.id]=i.tipo);
+  ctx=ctx||[]; base=base||{}; if(!uns.length||!vazios.length) return vazios;
+  let melhor=null, melhorS=Infinity;
+  for(let t=0;t<(tentativas||40);t++){
+    const ord=uns.slice(); for(let k=ord.length-1;k>0;k--){ const j=Math.floor(Math.random()*(k+1)); [ord[k],ord[j]]=[ord[j],ord[k]]; } // ordem sorteada: ninguém leva vantagem por estar no começo da lista
+    const sl=vazios.map(x=>Object.assign({},x,{igrejas:[]})); const cnt=Object.assign({},base);
+    sl.forEach(x=>{ // sorteio guiado: quem entrou menos tem preferência
+      const peso=u=>u.reduce((a,c)=>a+(cnt[c]||0)*(tipo[c]==='pequena'?1:2),0)/u.length + Math.random()*1.5;
+      const u=ord.slice().sort((a,b)=>peso(a)-peso(b))[0];
+      x.igrejas=u.slice(); u.forEach(c=>cnt[c]=(cnt[c]||0)+1);
+    });
+    let s=pontuarProd(sl,ctx,tipo,true,base), mudou=true, voltas=0;
+    while(mudou && voltas++<30){ mudou=false;
+      for(let i=0;i<sl.length;i++){ const orig=sl[i].igrejas;
+        for(const u of ord){ if(u.join()===orig.join()) continue; sl[i].igrejas=u.slice(); const ns=pontuarProd(sl,ctx,tipo,true,base); if(ns<s){ s=ns; mudou=true; break; } sl[i].igrejas=orig; } }
+      for(let i=0;i<sl.length;i++) for(let j=i+1;j<sl.length;j++){
+        const a=sl[i].igrejas, b=sl[j].igrejas; if(a.join()===b.join()) continue;
+        sl[i].igrejas=b; sl[j].igrejas=a; const ns=pontuarProd(sl,ctx,tipo,true,base);
+        if(ns<s){ s=ns; mudou=true; } else { sl[i].igrejas=a; sl[j].igrejas=b; } }
+    }
+    if(s<melhorS){ melhorS=s; melhor=sl.map(x=>Object.assign({},x,{igrejas:x.igrejas.slice()})); }
+  }
+  return melhor;
+}
+function analisarProd(sl,ctx,igrejas,diasSemana){
+  const tipo={}, nome={}; igrejas.forEach(i=>{ tipo[i.id]=i.tipo; nome[i.id]=i.nome; });
+  const repeteSemana = diasSemana>capacidadeProd(igrejas); // poucas igrejas: repetir na semana é inevitável
+  const soUmaPequena = igrejas.filter(i=>i.tipo==='pequena').length===1;
+  const ultDow={}, porSemana={}, cnt={}; const flags=[];
+  const passo=(x,daCtx)=>{
+    const dn=diaNum(x.data), wk=semanaDe(dn,x.dow); const msgs=[]; let nivel=null;
+    const sem=porSemana[wk]||(porSemana[wk]={});
+    if(!x.igrejas.length){ if(!daCtx) flags.push({n:'bad',m:'Nenhuma igreja escalada'}); ultDow[x.dow]=[]; return; }
+    x.igrejas.forEach(c=>{
+      if(!daCtx){
+        cnt[c]=(cnt[c]||0)+1;
+        if(!tipo[c]){ msgs.push('Igreja removida do cadastro'); nivel='bad'; }
+        else if((ultDow[x.dow]||[]).includes(c)){ msgs.push(nome[c]+' fez este dia na semana anterior'); nivel=nivel||'warn'; }
+        else if(sem[c] && !repeteSemana){ msgs.push(nome[c]+' já tem outro dia nesta semana'); nivel=nivel||'warn'; }
+      }
+      sem[c]=(sem[c]||0)+1;
+    });
+    if(!daCtx){
+      if(x.igrejas.length===1 && tipo[x.igrejas[0]]==='pequena' && !soUmaPequena){ msgs.push('Igreja pequena sozinha (falta a dupla)'); nivel=nivel||'warn'; }
+      flags.push(msgs.length?{n:nivel,m:msgs.join(' · ')}:null);
+    }
+    ultDow[x.dow]=x.igrejas;
+  };
+  (ctx||[]).forEach(x=>passo(x,true)); sl.forEach(x=>passo(x,false));
+  return {flags,cnt,repeteSemana,soUmaPequena};
+}
+/* ====== FIM DO MOTOR DAS MISSÕES ====== */
+
+/* ====== MOTOR DA VIGÍLIA ======
+   Cada função tem a área que a pessoa precisa saber e quantas pessoas leva.
+   Primeiro todo mundo ganha uma função; só repete pessoa quando faltar gente.
+   O primeiro de cada função é de preferência um mídia (os CPMs ainda estão em formação). */
+function qualifica(m,area){ const a=m.areas||{}, av=a.av||'nao';
+  if(area==='qualquer') return true;
+  if(area==='av_gravar') return av==='gravar'||av==='ambos';
+  if(area==='av_editar') return av==='editar'||av==='ambos';
+  if(area==='av') return av!=='nao';
+  return !!a[area];
+}
+function gerarVigilia(funcs,membros,tentativas){
+  let melhor=null, melhorS=Infinity;
+  for(let t=0;t<(tentativas||60);t++){
+    const uso={}; membros.forEach(m=>uso[m.id]=0);
+    const lista=funcs.map(f=>({fid:f.id, nome:f.nome, area:f.area, qtd:Math.max(1,+f.qtd||1), pessoas:[]}));
+    const nQual=f=>membros.filter(m=>qualifica(m,f.area)).length;
+    const ordem=lista.slice().sort((a,b)=>nQual(a)-nQual(b)||Math.random()-.5); // função com menos gente que sabe primeiro
+    const maxQ=Math.max(1,...lista.map(l=>l.qtd));
+    for(let k=0;k<maxQ;k++) for(const f of ordem){
+      if(f.pessoas.length>=f.qtd) continue;
+      const cands=membros.filter(m=>qualifica(m,f.area) && !f.pessoas.includes(m.id)); if(!cands.length) continue;
+      const min=Math.min(...cands.map(m=>uso[m.id])); let bons=cands.filter(m=>uso[m.id]===min);
+      if(!f.pessoas.length){ const md=bons.filter(m=>m.papel!=='cpm'); if(md.length) bons=md; }
+      const p=bons[Math.floor(Math.random()*bons.length)]; f.pessoas.push(p.id); uso[p.id]++;
+    }
+    membros.filter(m=>!uso[m.id]).forEach(m=>{ // quem sobrou reforça uma função que sabe fazer
+      const fs=lista.filter(f=>qualifica(m,f.area)); if(!fs.length) return;
+      fs.sort((a,b)=>a.pessoas.length/a.qtd-b.pessoas.length/b.qtd||Math.random()-.5); fs[0].pessoas.push(m.id); uso[m.id]++;
+    });
+    let s=0; lista.forEach(f=>{ s+=Math.max(0,f.qtd-f.pessoas.length)*1000; if(f.pessoas.length && f.pessoas.every(id=>(membros.find(m=>m.id===id)||{}).papel==='cpm')) s+=30; });
+    membros.forEach(m=>{ s+=Math.max(0,uso[m.id]-1)*50; if(!uso[m.id]) s+=20; });
+    if(s<melhorS){ melhorS=s; melhor=lista; }
+  }
+  return melhor||[];
+}
+/* ====== FIM DO MOTOR DA VIGÍLIA ====== */
+
+/* ====== IGREJAS, MISSÕES DA SEMANA E VIGÍLIA ====== */
+const FUNCAO_PADRAO = {
+  0:'Vídeo com os melhores momentos do Encontro Jovem',
+  1:'Vídeo chamando para o Algo a Mais',
+  2:'Fotos do Pé no Bairro ou testemunho de transformação de vida',
+  3:'Imagem com frase, versículo ou mensagem motivacional',
+  4:'Vídeo ou foto de uma ação dos projetos, ou apresentação de um projeto',
+  5:'Vídeo chamando para o Encontro Jovem'
+};
+const RODAPE_SEMANA = '⏰ *Entrega máxima:* até as 18h do dia da missão.\n☀️ *Domingo:* até as 19h.';
+const EMO_DIA = ['🙌','🔥','💪','✨','🚀','🎉'];
+const VIG_PADRAO = [
+  {nome:'📸 Fotografia', area:'fotografia', qtd:1},
+  {nome:'🎨 Design', area:'design', qtd:1},
+  {nome:'📱 Postagem', area:'qualquer', qtd:1},
+  {nome:'🎥 Vídeos', area:'av_gravar', qtd:1},
+  {nome:'🎬 Edição de vídeo', area:'av_editar', qtd:1}
+];
+const AREA_VIG = [['qualquer','Qualquer pessoa'],['fotografia','Fotografia'],['design','Design'],['jornalismo','Jornalismo'],['av','Audiovisual'],['av_gravar','Audiovisual – gravar'],['av_editar','Audiovisual – editar']];
+const CBOX = '<span class="cbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span>';
+
+const iuid = ()=>'i'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const mid  = ()=>'m'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const fid  = ()=>'f'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
+const vid  = ()=>'v'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
+const ddmm = s => s.slice(8)+'/'+s.slice(5,7);
+const fmtData = s => { if(!s) return ''; const [y,m,d]=s.split('-'); return d+'/'+m+'/'+y; };
+const somaDias = (s,n)=>{ const [y,m,d]=s.split('-').map(Number); return ymd(new Date(y,m-1,d+n)); };
+const dowDe = s=>{ const [y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d).getDay(); };
+const fmtHora = h=>{ if(!h) return ''; const [H,M]=h.split(':'); return (+H)+'h'+(M&&M!=='00'?M:''); };
+
+function defaultProducao(){ return {dias:[0,1,2,3,4,5].map(d=>({dow:d, funcao:FUNCAO_PADRAO[d]})), rodape:RODAPE_SEMANA}; }
+function normalizeProducao(p){
+  if(!p || !Array.isArray(p.dias)) return defaultProducao();
+  return {dias:p.dias.map(d=>({dow:+d.dow, funcao:d.funcao||''})).filter(d=>d.dow>=0&&d.dow<=5), rodape:(typeof p.rodape==='string')?p.rodape:RODAPE_SEMANA};
+}
+function normalizeMembro(m){ return {id:m.id||mid(), nome:m.nome||'', papel:m.papel==='cpm'?'cpm':'midia', areas:Object.assign({jornalismo:false,fotografia:false,design:false,av:'nao'},m.areas||{}), obs:m.obs||'', dataCpm:m.dataCpm||'', dataMidia:m.dataMidia||''}; }
+function normalizeIgreja(i){ return {id:i.id||iuid(), nome:i.nome||'', tipo:i.tipo==='pequena'?'pequena':'independente', pessoas:(Array.isArray(i.pessoas)?i.pessoas:[]).map(normalizeMembro)}; }
+function normalizeVigilia(v){
+  const funcoes = (v && Array.isArray(v.funcoes)) ? v.funcoes : VIG_PADRAO;
+  return {funcoes:funcoes.map(f=>({id:f.id||fid(), nome:f.nome||'', area:AREA_VIG.some(a=>a[0]===f.area)?f.area:'qualquer', qtd:Math.max(1,+f.qtd||1)})),
+          salvas:(v && Array.isArray(v.salvas)) ? v.salvas : []};
+}
+
+const nomeIgreja = id => { const i=igrejas.find(x=>x.id===id); return i?(i.nome||'Sem nome'):'(igreja removida)'; };
+const nomesUnidade = ids => ids.length ? ids.map(nomeIgreja).join(' e ') : '(nenhuma igreja)';
+const diasSemanaAtivos = ()=> ORDEM_SEMANA.map(w=>producao.dias.find(d=>d.dow===w)).filter(Boolean);
+function todosMembros(){ // pessoas das igrejas + a equipe da aba Pessoas
+  const out=[];
+  igrejas.forEach(i=>i.pessoas.forEach(m=>out.push({id:m.id, nome:m.nome, papel:m.papel, areas:m.areas, grupo:i.id, grupoNome:i.nome||'Sem nome'})));
+  pessoas.forEach(p=>out.push({id:p.id, nome:p.nome, papel:p.aprendizado?'cpm':'midia', areas:p.areas||{}, grupo:'_equipe', grupoNome:'Equipe Mídia (aba Pessoas)'}));
+  return out;
+}
+const nomeMembro = id => { const m=todosMembros().find(x=>x.id===id); return m?m.nome:'(pessoa removida)'; };
+
+let subIgreja = ['igrejas','semana','vigilia'].includes(LS.get('escala_subigreja')) ? LS.get('escala_subigreja') : 'igrejas';
+const igAbertas = new Set();
+let semDom=null, rascSem=null, semCfgAberto=null, vigRasc=null, vigVer=null, vigFuncAberto=false;
+
+function renderIgrejas(){
+  const box=$('#view-igrejas');
+  box.innerHTML='<div class="avseg subseg" id="subSeg">'+[['igrejas','⛪ Igrejas'],['semana','📅 Missões da semana'],['vigilia','🌙 Vigília']].map(o=>'<button type="button" class="avopt'+(subIgreja===o[0]?' on':'')+'" data-sub="'+o[0]+'">'+o[1]+'</button>').join('')+'</div><div id="subBox"></div>';
+  $$('#subSeg .avopt').forEach(b=>b.onclick=()=>{ subIgreja=b.dataset.sub; LS.set('escala_subigreja',subIgreja); renderIgrejas(); });
+  if(subIgreja==='semana') renderSemana(); else if(subIgreja==='vigilia') renderVigilia(); else renderListaIgrejas();
+}
+
+/* ---------- Igrejas e pessoas ---------- */
+function membroCard(i,m,can){
+  const ar=areasText(m);
+  const datas=[m.dataCpm?'CPM desde '+fmtData(m.dataCpm):'', (m.papel!=='cpm'&&m.dataMidia)?'Mídia desde '+fmtData(m.dataMidia):''].filter(Boolean).join(' · ');
+  return '<div class="mcard'+(m.papel==='cpm'?' cpm':'')+'"><div class="pname" style="font-size:.95rem">'+esc(m.nome)+'</div>'+
+    '<div class="tags"><span class="tg '+(m.papel==='cpm'?'cpm':'midia')+'">'+(m.papel==='cpm'?'CPM':'Mídia')+'</span>'+ar.map(a=>'<span class="tg">'+esc(a)+'</span>').join('')+'</div>'+
+    (datas?'<div class="mdates">'+datas+'</div>':'')+(m.obs?'<div class="obs">'+esc(m.obs)+'</div>':'')+
+    (can?'<div class="foot"><button class="btn ghost sm" onclick="editMembro(\''+i.id+'\',\''+m.id+'\')">Editar</button><button class="btn danger sm" onclick="removeMembro(\''+i.id+'\',\''+m.id+'\')">Remover</button></div>':'')+'</div>';
+}
+function renderListaIgrejas(){
+  const box=$('#subBox'), can=canEdit();
+  const nInd=igrejas.filter(i=>i.tipo!=='pequena').length, nPeq=igrejas.length-nInd;
+  let html='<p class="cfg-note"><strong>Independente</strong> faz a missão do dia sozinha. <strong>Pequena</strong> faz em dupla com outra pequena (o app junta as duplas e vai variando). Dentro de cada igreja ficam os mídias e os CPMs (quem está em formação).</p>';
+  if(!igrejas.length) html+=emptyState('Nenhuma igreja cadastrada', can?'Clique em “+ Adicionar igreja”.':'As igrejas aparecerão aqui.');
+  html+=igrejas.map(i=>{
+    const nM=i.pessoas.filter(m=>m.papel!=='cpm').length, nC=i.pessoas.length-nM, aberta=igAbertas.has(i.id);
+    let h='<div class="cfg-card igcard" data-id="'+i.id+'"><div class="ighead">';
+    if(can) h+='<input class="inome" value="'+esc(i.nome)+'" placeholder="Nome da igreja"><select class="itipo"><option value="independente"'+(i.tipo!=='pequena'?' selected':'')+'>Independente (faz sozinha)</option><option value="pequena"'+(i.tipo==='pequena'?' selected':'')+'>Pequena (faz em dupla)</option></select>';
+    else h+='<h4 class="igtitulo">'+esc(i.nome||'Sem nome')+(i.tipo==='pequena'?' <span class="tg learn">pequena</span>':'')+'</h4>';
+    h+='<span class="igcount">'+nM+' mídia'+(nM===1?'':'s')+' · '+nC+' CPM'+(nC===1?'':'s')+'</span>';
+    h+='<button class="btn sm" onclick="toggleIgreja(\''+i.id+'\')">'+(aberta?'Fechar':'Ver pessoas')+'</button>';
+    if(can) h+='<button class="btn danger sm" onclick="removeIgreja(\''+i.id+'\')">Remover</button>';
+    h+='</div>';
+    if(aberta){
+      const ord=i.pessoas.slice().sort((a,b)=>(a.papel===b.papel?0:a.papel==='cpm'?1:-1)||a.nome.localeCompare(b.nome));
+      h+='<div class="igbody"><div class="mgrid">'+(ord.length? ord.map(m=>membroCard(i,m,can)).join('') : '<div class="mdates">Ninguém cadastrado nesta igreja ainda.</div>')+'</div>';
+      if(can) h+='<button class="btn primary sm" style="margin-top:12px" onclick="novoMembro(\''+i.id+'\')">+ Cadastrar nova pessoa</button>';
+      h+='</div>';
+    }
+    return h+'</div>';
+  }).join('');
+  if(can) html+='<button class="btn" onclick="addIgreja()">+ Adicionar igreja</button>';
+  if(igrejas.length) html+='<p class="cfg-note" style="margin-top:14px">'+nInd+' independente(s) e '+nPeq+' pequena(s).'+(nPeq%2===1&&nPeq>1?' Como o número de pequenas é ímpar, a cada dupla uma delas fica de fora e entra na próxima.':'')+(nPeq===1?' Só há uma igreja pequena: ela faz sozinha até ter outra para formar dupla.':'')+'</p>';
+  box.innerHTML=html;
+  if(!can) return;
+  $$('#subBox .igcard .inome, #subBox .igcard .itipo').forEach(el=>el.onchange=async()=>{
+    const c=el.closest('.igcard'), i=igrejas.find(x=>x.id===c.dataset.id); if(!i) return;
+    i.nome=c.querySelector('.inome').value.trim()||'Sem nome'; i.tipo=c.querySelector('.itipo').value;
+    await persist(); renderAll(); if(el.classList.contains('itipo')) renderIgrejas(); });
+}
+window.toggleIgreja=id=>{ if(igAbertas.has(id)) igAbertas.delete(id); else igAbertas.add(id); renderIgrejas(); };
+window.addIgreja=async()=>{ if(!canEdit()) return; igrejas.push({id:iuid(), nome:'', tipo:'independente', pessoas:[]}); await persist(); renderAll(); renderIgrejas(); const ins=$$('#subBox .inome'); if(ins.length) ins[ins.length-1].focus(); };
+window.removeIgreja=async(id)=>{ if(!canEdit()) return; const i=igrejas.find(x=>x.id===id); if(!i) return;
+  if(!confirm('Remover "'+(i.nome||'igreja sem nome')+'"'+(i.pessoas.length?' e as '+i.pessoas.length+' pessoa(s) cadastradas nela':'')+'?')) return;
+  igrejas=igrejas.filter(x=>x.id!==id); await persist(); renderAll(); renderIgrejas(); toast('Igreja removida'); };
+window.novoMembro=igId=>{ if(canEdit()) abrirMembro(igId,null); };
+window.editMembro=(igId,id)=>{ if(!canEdit()) return; const i=igrejas.find(x=>x.id===igId); const m=i&&i.pessoas.find(x=>x.id===id); if(m) abrirMembro(igId,m); };
+window.removeMembro=async(igId,id)=>{ if(!canEdit()) return; const i=igrejas.find(x=>x.id===igId); const m=i&&i.pessoas.find(x=>x.id===id); if(!m||!confirm('Remover "'+m.nome+'" da igreja '+(i.nome||'')+'?')) return;
+  i.pessoas=i.pessoas.filter(x=>x.id!==id); await persist(); renderIgrejas(); toast('Pessoa removida'); };
+
+let mEdit=null, mDraft=null;
+function buildMembroModal(){
+  $('#mAreaList').innerHTML=AREAS.map(a=>'<div class="chk" data-area="'+a.k+'">'+CBOX+a.l+'</div>').join('');
+  $('#mAvSeg').innerHTML=AV_OPTS.map(o=>'<button type="button" class="avopt" data-av="'+o[0]+'">'+o[1]+'</button>').join('');
+  $('#papelSeg').innerHTML='<button type="button" class="avopt" data-papel="midia">Mídia</button><button type="button" class="avopt" data-papel="cpm">CPM (em formação)</button>';
+  $$('#mAreaList .chk').forEach(el=>el.onclick=()=>{ const k=el.dataset.area; mDraft.areas[k]=!mDraft.areas[k]; pintarMembro(); });
+  $$('#mAvSeg .avopt').forEach(el=>el.onclick=()=>{ mDraft.areas.av=el.dataset.av; pintarMembro(); });
+  $$('#papelSeg .avopt').forEach(el=>el.onclick=()=>{ mDraft.papel=el.dataset.papel; pintarMembro(); });
+  const fechar=()=>$('#igOverlay').classList.remove('show');
+  $('#mClose').onclick=$('#mCancel').onclick=fechar;
+  $('#igOverlay').onclick=e=>{ if(e.target.id==='igOverlay') fechar(); };
+  $('#mSave').onclick=salvarMembro;
+}
+function pintarMembro(){
+  $$('#papelSeg .avopt').forEach(b=>b.classList.toggle('on',b.dataset.papel===mDraft.papel));
+  $$('#mAreaList .chk').forEach(el=>el.classList.toggle('on',!!mDraft.areas[el.dataset.area]));
+  $$('#mAvSeg .avopt').forEach(b=>b.classList.toggle('on',b.dataset.av===(mDraft.areas.av||'nao')));
+  $('#wrapDataMidia').classList.toggle('hidden',mDraft.papel==='cpm');
+}
+function abrirMembro(igId,m){
+  mEdit={ig:igId, id:m?m.id:null};
+  mDraft={papel:m?m.papel:'midia', areas:Object.assign({jornalismo:false,fotografia:false,design:false,av:'nao'}, m?m.areas:{})};
+  $('#mTitle').textContent=m?'Editar pessoa':'Nova pessoa da igreja';
+  $('#mIgreja').innerHTML=igrejas.map(i=>'<option value="'+i.id+'"'+(i.id===igId?' selected':'')+'>'+esc(i.nome||'Sem nome')+'</option>').join('');
+  $('#mNome').value=m?m.nome:''; $('#mObs').value=m?m.obs:''; $('#mDataCpm').value=m?m.dataCpm:''; $('#mDataMidia').value=m?m.dataMidia:'';
+  pintarMembro(); $('#igOverlay').classList.add('show'); setTimeout(()=>$('#mNome').focus(),50);
+}
+async function salvarMembro(){
+  const nome=$('#mNome').value.trim(); if(!nome){ toast('Digite o nome da pessoa'); $('#mNome').focus(); return; }
+  const destino=igrejas.find(i=>i.id===$('#mIgreja').value), origem=igrejas.find(i=>i.id===mEdit.ig); if(!destino) return;
+  const dados={nome, papel:mDraft.papel, areas:Object.assign({},mDraft.areas), obs:$('#mObs').value.trim(), dataCpm:$('#mDataCpm').value, dataMidia:$('#mDataMidia').value};
+  if(mEdit.id && origem){ const m=origem.pessoas.find(x=>x.id===mEdit.id); if(m){ Object.assign(m,dados); if(destino!==origem){ origem.pessoas=origem.pessoas.filter(x=>x.id!==m.id); destino.pessoas.push(m); } } }
+  else destino.pessoas.push(Object.assign({id:mid()},dados));
+  igAbertas.add(destino.id); await persist(); $('#igOverlay').classList.remove('show'); renderIgrejas(); toast(mEdit.id?'Pessoa atualizada':'Pessoa cadastrada');
+}
+
+/* ---------- Missões da semana (domingo a sexta) ---------- */
+function domingoDe(s){ const w=dowDe(s); return somaDias(s, w===6?1:-w); } // sábado aponta para o domingo seguinte
+function domingoPadrao(){ const h=ymd(new Date()), d=domingoDe(h); return d<h?somaDias(d,7):d; }
+function contextoSemana(dom){ // semana anterior salva (não repetir o mesmo dia) + 4 semanas salvas (justiça)
+  const ant=escalasSemana[somaDias(dom,-7)];
+  const ctx=(ant&&Array.isArray(ant.slots)) ? ant.slots.map(s=>({data:s.data, dow:s.dow, igrejas:(s.igrejas||[]).slice()})) : [];
+  const base={}; for(let k=1;k<=8;k++){ const w=escalasSemana[somaDias(dom,-7*k)]; if(w&&Array.isArray(w.slots)) w.slots.forEach(s=>(s.igrejas||[]).forEach(c=>base[c]=(base[c]||0)+1)); }
+  return {ctx, base};
+}
+function textoSemana(dom,sl){
+  let t='🎬 *ESCALA DE PRODUÇÕES* 🎬\n📅 Semana de '+ddmm(dom)+' a '+ddmm(somaDias(dom,5));
+  sl.forEach(s=>{ t+='\n\n'+EMO_DIA[s.dow]+' *'+DOW[s.dow]+' – '+ddmm(s.data)+'*\n⛪ '+(s.igrejas.length>1?'Igrejas':'Igreja')+': '+nomesUnidade(s.igrejas)+'\n🎯 Missão: '+(s.missao||'—'); });
+  const rod=(producao.rodape||'').trim();
+  return t+(rod?'\n\n'+rod:'');
+}
+function statusHtml(r,id){ return r.salvo ? '<span class="esc-status saved" id="'+id+'">✓ salva'+(r.em?' em '+new Date(r.em).toLocaleDateString('pt-BR'):'')+'</span>' : '<span class="esc-status unsaved" id="'+id+'">● não salva ainda</span>'; }
+function marcarNaoSalva(r,id){ r.salvo=false; const el=$('#'+id); if(el){ el.className='esc-status unsaved'; el.textContent='● não salva ainda'; } }
+function renderSemana(){
+  const box=$('#subBox'), can=canEdit();
+  if(!semDom) semDom=domingoPadrao();
+  const dom=semDom, ds=diasSemanaAtivos();
+  if(!rascSem || rascSem.dom!==dom){ const sv=escalasSemana[dom];
+    rascSem = sv ? {dom, slots:sv.slots.map(s=>({data:s.data, dow:s.dow, missao:s.missao||'', igrejas:(s.igrejas||[]).slice()})), salvo:true, em:sv.atualizado_em} : {dom, slots:null, salvo:false}; }
+  const r=rascSem; let html='';
+  if(can){
+    const aberto = semCfgAberto===null ? !Object.keys(escalasSemana).length : semCfgAberto;
+    html+='<details class="cfg-card esc-ant" id="semCfg"'+(aberto?' open':'')+'><summary>Dias e missão de cada dia</summary>'+
+      '<p style="margin:8px 0 0">Marque os dias que têm missão (de domingo a sexta) e escreva a missão de cada um. Ao gerar, ela entra na escala e dá para mudar só naquela semana.</p>'+
+      '<div class="prod-pick" id="prodPick">'+ORDEM_SEMANA.map(w=>'<div class="pick'+(producao.dias.some(d=>d.dow===w)?' on':'')+'" data-dow="'+w+'">'+CBOX+DOW[w]+'</div>').join('')+'</div>'+
+      (ds.length?'<div class="slot-grid" style="margin-top:14px">'+ds.map(d=>'<div class="slot"><h4>'+EMO_DIA[d.dow]+' '+DOW[d.dow]+'</h4><textarea class="prod-func-in" data-dow="'+d.dow+'" rows="3" placeholder="Missão deste dia">'+esc(d.funcao)+'</textarea></div>').join('')+'</div>':'')+
+      '<label class="field" style="margin-top:14px">Recado do final do texto (prazo de entrega)<textarea id="semRodape" rows="2">'+esc(producao.rodape)+'</textarea></label></details>';
+  }
+  html+='<div class="gen-config"><label class="field" style="max-width:240px">Domingo da semana<input type="date" id="semDom" value="'+dom+'"></label>'+
+    '<p class="hint">Semana de <strong>domingo '+ddmm(dom)+'</strong> a <strong>sexta '+ddmm(somaDias(dom,5))+'</strong>. Cada dia recebe uma igreja independente ou uma dupla de pequenas. O app evita a mesma igreja no mesmo dia da semana anterior e divide de forma justa olhando as últimas semanas salvas.</p></div>';
+  html+='<div class="esc-actions">';
+  if(can) html+='<button class="btn primary" id="btnGerarSem">'+(r.slots?'Gerar outra opção':'Gerar escala da semana')+'</button>';
+  if(can && r.slots) html+='<button class="btn" id="btnSalvarSem">Salvar escala da semana</button>';
+  if(r.slots) html+='<button class="btn" id="btnCopiarSem">Copiar texto</button>';
+  if(r.slots && can) html+=statusHtml(r,'semStatus');
+  html+='</div>';
+  if(!r.slots){
+    const falta = !igrejas.length ? (can?'Cadastre as igrejas em “⛪ Igrejas” e depois gere aqui.':'Quando a escala for salva, ela aparece aqui.')
+      : !ds.length ? 'Marque os dias que têm missão em “Dias e missão de cada dia”.' : (can?'Clique em “Gerar escala da semana”.':'Quando a escala for salva, ela aparece aqui.');
+    box.innerHTML=html+'<div class="esc-grid">'+emptyState('Escala desta semana ainda não feita', falta)+'</div>'; bindSemana(); return;
+  }
+  const {ctx,base}=contextoSemana(dom); const an=analisarProd(r.slots,ctx,igrejas,ds.length||r.slots.length);
+  if(can && (an.repeteSemana||an.soUmaPequena)) html+='<p class="cfg-note">'+(an.repeteSemana?'Há mais dias com missão do que igrejas para cobrir, então alguma igreja pega 2 dias na semana. ':'')+(an.soUmaPequena?'Só há uma igreja pequena, então ela faz sozinha.':'')+'</p>';
+  const peq=igrejas.filter(x=>x.tipo==='pequena');
+  html+='<div class="esc-turno" style="margin-bottom:16px"><h4>📅 Semana de '+ddmm(dom)+' a '+ddmm(somaDias(dom,5))+'</h4>'+r.slots.map((s,i)=>{
+    const f=an.flags[i]; const [a,b]=s.igrejas; const ia=igrejas.find(x=>x.id===a);
+    let campo;
+    if(can){
+      campo='<div class="prod-sels"><select class="esc-sel prod-a" data-i="'+i+'"><option value="">— nenhuma —</option>'+igrejas.map(x=>'<option value="'+x.id+'"'+(x.id===a?' selected':'')+'>'+esc(x.nome||'Sem nome')+(x.tipo==='pequena'?' (pequena)':'')+'</option>').join('')+(a&&!ia?'<option value="'+a+'" selected>(igreja removida)</option>':'')+'</select>';
+      if(ia && ia.tipo==='pequena') campo+='<select class="esc-sel prod-b" data-i="'+i+'"><option value="">— sozinha —</option>'+peq.filter(x=>x.id!==a).map(x=>'<option value="'+x.id+'"'+(x.id===b?' selected':'')+'>+ '+esc(x.nome||'Sem nome')+'</option>').join('')+'</select>';
+      campo+='</div><input class="esc-sel sem-missao" data-i="'+i+'" value="'+esc(s.missao)+'" placeholder="Missão do dia">';
+    } else campo='<span class="esc-name">'+esc(nomesUnidade(s.igrejas))+'</span><span class="prod-func">🎯 '+esc(s.missao||'—')+'</span>';
+    return '<div class="esc-row'+(f?' '+f.n:'')+'"><span class="esc-date">'+SHORT[s.dow]+' '+ddmm(s.data)+'</span>'+campo+(f&&can?'<span class="esc-flag">⚠ '+esc(f.m)+'</span>':'')+'</div>';
+  }).join('')+'</div>';
+  const tot={}; igrejas.forEach(x=>tot[x.id]=(base[x.id]||0)+(an.cnt[x.id]||0));
+  const ids=Object.keys(tot).sort((x,y)=>tot[y]-tot[x]||nomeIgreja(x).localeCompare(nomeIgreja(y)));
+  if(can && ids.length) html+='<div class="cfg-card"><h4>Quantas vezes cada igreja entrou</h4><p style="margin:0">Esta semana + as 8 semanas salvas antes dela.</p><div class="tags" style="margin-top:8px">'+ids.map(id=>'<span class="tg">'+esc(nomeIgreja(id))+': '+tot[id]+'</span>').join('')+'</div></div>';
+  box.innerHTML=html; bindSemana();
+}
+function bindSemana(){
+  const r=rascSem, dom=r.dom;
+  $('#semDom').onchange=e=>{ const v=e.target.value; if(!v) return;
+    if(r.slots && !r.salvo && canEdit() && !confirm('Trocar de semana? A escala que ainda não foi salva vai sumir.')){ e.target.value=dom; return; }
+    semDom=domingoDe(v); rascSem=null; renderSemana(); };
+  const cfg=$('#semCfg'); if(cfg) cfg.querySelector('summary').onclick=()=>{ semCfgAberto=!cfg.open; }; // só o clique conta (abrir já aberto também dispara toggle)
+  $$('#prodPick .pick').forEach(el=>el.onclick=async()=>{ const w=+el.dataset.dow;
+    if(producao.dias.some(d=>d.dow===w)) producao.dias=producao.dias.filter(d=>d.dow!==w); else producao.dias.push({dow:w, funcao:FUNCAO_PADRAO[w]||''});
+    semCfgAberto=true; await persist(); renderSemana(); });
+  $$('#subBox .prod-func-in').forEach(el=>el.onchange=async()=>{ const d=producao.dias.find(x=>x.dow===+el.dataset.dow); if(d){ d.funcao=el.value.trim(); await persist(); toast('Missão salva'); } });
+  const rod=$('#semRodape'); if(rod) rod.onchange=async()=>{ producao.rodape=rod.value.trim(); await persist(); toast('Recado salvo'); };
+  const g=$('#btnGerarSem'); if(g) g.onclick=()=>{
+    if(!igrejas.length){ toast('Cadastre as igrejas primeiro'); return; }
+    if(!diasSemanaAtivos().length){ toast('Marque os dias que têm missão'); return; }
+    if(r.slots && !r.salvo && !confirm('Gerar outra opção? As trocas de igreja que você fez e ainda não salvou vão sumir.')) return;
+    const missaoAnt={}; if(r.slots) r.slots.forEach(s=>missaoAnt[s.dow]=s.missao);
+    const vazios=slotsSemana(dom,producao.dias).map(s=>Object.assign(s,{missao:(missaoAnt[s.dow]!=null?missaoAnt[s.dow]:s.funcao)}));
+    const {ctx,base}=contextoSemana(dom);
+    r.slots=gerarProd(vazios,igrejas,ctx,40,base).map(s=>({data:s.data, dow:s.dow, missao:s.missao, igrejas:s.igrejas.slice()}));
+    r.salvo=false; renderSemana(); toast('Escala da semana gerada. Confira e salve.'); };
+  const sv=$('#btnSalvarSem'); if(sv) sv.onclick=async()=>{ const agora=new Date().toISOString();
+    escalasSemana[dom]={slots:r.slots.map(s=>({data:s.data, dow:s.dow, missao:s.missao||'', igrejas:s.igrejas.slice()})), atualizado_em:agora};
+    await persist(); r.salvo=true; r.em=agora; renderSemana(); toast('Escala da semana salva'); };
+  const cp=$('#btnCopiarSem'); if(cp) cp.onclick=()=>copyText(textoSemana(dom,r.slots),'Escala da semana copiada');
+  $$('#subBox .prod-a').forEach(el=>el.onchange=()=>{ const s=r.slots[+el.dataset.i]; const ig=igrejas.find(x=>x.id===el.value);
+    s.igrejas = !el.value ? [] : (ig&&ig.tipo==='pequena'&&s.igrejas[1]&&s.igrejas[1]!==el.value ? [el.value,s.igrejas[1]] : [el.value]); r.salvo=false; renderSemana(); });
+  $$('#subBox .prod-b').forEach(el=>el.onchange=()=>{ const s=r.slots[+el.dataset.i]; s.igrejas = el.value ? [s.igrejas[0],el.value] : [s.igrejas[0]]; r.salvo=false; renderSemana(); });
+  $$('#subBox .sem-missao').forEach(el=>el.oninput=()=>{ r.slots[+el.dataset.i].missao=el.value; marcarNaoSalva(r,'semStatus'); });
+}
+
+/* ---------- Vigília ---------- */
+function novaVig(){ return {id:null, data:'', tema:'', hora:'', presentes:[], lista:null, salvo:false}; }
+const vigiliasOrdenadas = ()=> vigilia.salvas.slice().sort((a,b)=>(b.data||'').localeCompare(a.data||''));
+function textoVigilia(v){
+  const tema=(v.tema||'').trim().replace(/^vig[ií]lia\s*/i,'');
+  let t='🌙 *Vigília'+(tema?' '+tema:'')+'* 🌙';
+  if(v.data) t+='\n📅 '+DOW[dowDe(v.data)]+', '+ddmm(v.data);
+  if(v.hora) t+='\n⏰ Mídias devem se reunir às '+fmtHora(v.hora);
+  (v.lista||[]).forEach(f=>{ t+='\n\n*'+f.nome+'*\n'+(f.pessoas.length?f.pessoas.map(id=>'▪️ '+nomeMembro(id)).join('\n'):'▪️ —'); });
+  return t;
+}
+function vigResultado(v,edit){
+  const todos=todosMembros(), porId={}; todos.forEach(m=>porId[m.id]=m);
+  const presentes=todos.filter(m=>v.presentes.includes(m.id));
+  const opt=m=>'<option value="'+m.id+'">'+esc(m.nome)+(m.papel==='cpm'?' (CPM)':'')+'</option>';
+  let h='<div class="esc-grid">'+v.lista.map((f,fi)=>{
+    const chips=f.pessoas.map((id,pi)=>{ const m=porId[id]; return '<span class="vchip'+(m&&m.papel==='cpm'?' cpm':'')+'">'+esc(m?m.nome:'(pessoa removida)')+(m&&m.papel==='cpm'?' · CPM':'')+(edit?'<button type="button" class="vrem" data-f="'+fi+'" data-p="'+pi+'" title="Tirar desta função">✕</button>':'')+'</span>'; }).join('');
+    let add='';
+    if(edit){ const ops=presentes.filter(m=>!f.pessoas.includes(m.id)), q=ops.filter(m=>qualifica(m,f.area)), nq=ops.filter(m=>!qualifica(m,f.area));
+      if(ops.length) add='<select class="esc-sel vadd" data-f="'+fi+'"><option value="">+ adicionar pessoa</option>'+q.map(opt).join('')+(nq.length?'<optgroup label="Não marcou essa área">'+nq.map(opt).join('')+'</optgroup>':'')+'</select>'; }
+    const falta=f.qtd-f.pessoas.length;
+    return '<div class="esc-turno"><h4>'+esc(f.nome||'Sem nome')+'</h4><div class="vchips">'+(chips||'<span class="mdates">ninguém ainda</span>')+'</div>'+
+      (edit&&falta>0?'<div class="vfalta">⚠ falta'+(falta>1?'m '+falta+' pessoas':' 1 pessoa')+' que saiba essa área</div>':'')+(add?'<div style="margin-top:10px">'+add+'</div>':'')+'</div>';
+  }).join('')+'</div>';
+  if(edit){ const sem=presentes.filter(m=>!v.lista.some(f=>f.pessoas.includes(m.id))); if(sem.length) h+='<p class="cfg-note">Sem função: '+sem.map(m=>esc(m.nome)).join(', ')+'. Dá para pôr pelo “+ adicionar pessoa” em alguma função.</p>'; }
+  return h;
+}
+function renderVigilia(){
+  const box=$('#subBox'), can=canEdit(), vs=vigiliasOrdenadas();
+  if(!can){
+    if(!vs.length){ box.innerHTML=emptyState('Nenhuma escala de vigília ainda','Quando for salva, ela aparece aqui.'); return; }
+    const v=vs.find(x=>x.id===vigVer)||vs[0];
+    let html='<div class="esc-actions">'+vs.map(x=>'<button class="btn sm'+(x.id===v.id?' primary':'')+'" data-ver="'+x.id+'">'+esc(fmtData(x.data)||'sem data')+(x.tema?' · '+esc(x.tema):'')+'</button>').join('')+'</div>';
+    html+='<div class="gen-config"><h4 style="margin:0 0 4px">🌙 Vigília'+(v.tema?' '+esc(v.tema.replace(/^vig[ií]lia\s*/i,'')):'')+'</h4><p class="hint" style="margin:0">'+(v.data?DOW[dowDe(v.data)]+', '+fmtData(v.data):'')+(v.hora?' · mídias se reúnem às '+fmtHora(v.hora):'')+'</p></div>';
+    html+=vigResultado(v,false)+'<button class="btn" id="btnCopiarVig">Copiar texto</button>';
+    box.innerHTML=html;
+    $$('#subBox [data-ver]').forEach(b=>b.onclick=()=>{ vigVer=b.dataset.ver; renderVigilia(); });
+    $('#btnCopiarVig').onclick=()=>copyText(textoVigilia(v),'Escala da vigília copiada');
+    return;
+  }
+  if(!vigRasc) vigRasc=novaVig();
+  const v=vigRasc; let html='';
+  html+='<details class="cfg-card esc-ant" id="vigFuncDet"'+(vigFuncAberto||!vigilia.funcoes.length?' open':'')+'><summary>Funções da vigília ('+vigilia.funcoes.length+')</summary>'+
+    '<p style="margin:8px 0 10px">Nome da função (pode pôr emoji), quem pode fazer e quantas pessoas ela leva.</p>'+
+    vigilia.funcoes.map(f=>'<div class="vrow" data-id="'+f.id+'"><input class="vnome" value="'+esc(f.nome)+'" placeholder="Ex: 📸 Fotografia"><select class="varea">'+AREA_VIG.map(a=>'<option value="'+a[0]+'"'+(a[0]===f.area?' selected':'')+'>'+a[1]+'</option>').join('')+'</select><input class="vqtd" type="number" min="1" max="20" value="'+f.qtd+'" title="Quantas pessoas"><button class="btn danger sm" onclick="removeFuncVig(\''+f.id+'\')">Remover</button></div>').join('')+
+    '<button class="btn sm" style="margin-top:4px" onclick="addFuncVig()">+ Adicionar função</button></details>';
+  if(vs.length) html+='<details class="cfg-card esc-ant"><summary>Vigílias salvas ('+vs.length+')</summary>'+vs.map(x=>'<div class="trow2"><span>'+esc(fmtData(x.data)||'sem data')+(x.tema?' · '+esc(x.tema):'')+'</span><button class="btn sm" onclick="abrirVig(\''+x.id+'\')">Abrir</button><button class="btn danger sm" onclick="removerVig(\''+x.id+'\')">Remover</button></div>').join('')+'</details>';
+  html+='<div class="gen-config"><div class="esc-actions" style="margin-bottom:12px"><strong>'+(v.id?'Vigília salva':'Nova escala de vigília')+'</strong>'+(v.id?'<button class="btn sm" onclick="novaVigilia()">+ Nova vigília</button>':'')+'</div>'+
+    '<div class="vig-form"><label class="field">Dia<input type="date" id="vigData" value="'+esc(v.data)+'"></label><label class="field">Tema / nome da vigília<input id="vigTema" value="'+esc(v.tema)+'" placeholder="Ex: da Virada"></label><label class="field">Mídias se reúnem às<input type="time" id="vigHora" value="'+esc(v.hora)+'"></label></div>';
+  const grupos=[]; todosMembros().forEach(m=>{ let g=grupos.find(x=>x.id===m.grupo); if(!g){ g={id:m.grupo, nome:m.grupoNome, ms:[]}; grupos.push(g); } g.ms.push(m); });
+  html+='<div class="blk-t" style="margin-top:18px">Quem pode ir <span style="font-weight:500" id="vigCont">('+v.presentes.length+' marcada'+(v.presentes.length===1?'':'s')+')</span></div>';
+  if(!grupos.length) html+='<p class="hint">Cadastre as pessoas dentro das igrejas (em “⛪ Igrejas”) para elas aparecerem aqui.</p>';
+  grupos.forEach(g=>{ html+='<div class="pres-grupo"><h5>'+esc(g.nome)+'<button type="button" class="btn ghost sm pres-todos" data-g="'+g.id+'">Marcar todos</button></h5><div class="prod-pick pres-pick">'+
+    g.ms.map(m=>'<div class="pick'+(v.presentes.includes(m.id)?' on':'')+'" data-m="'+m.id+'" data-g="'+g.id+'">'+CBOX+'<span class="pnome">'+esc(m.nome)+'</span>'+(m.papel==='cpm'?'<small>CPM</small>':'')+'</div>').join('')+'</div></div>'; });
+  html+='</div>';
+  html+='<div class="esc-actions"><button class="btn primary" id="btnGerarVig">'+(v.lista?'Gerar outra opção':'Gerar escala da vigília')+'</button>'+(v.lista?'<button class="btn" id="btnSalvarVig">Salvar vigília</button><button class="btn" id="btnCopiarVig">Copiar texto</button>'+statusHtml(v,'vigStatus'):'')+'</div>';
+  if(v.lista) html+=vigResultado(v,true);
+  box.innerHTML=html; bindVigilia();
+}
+function bindVigilia(){
+  const v=vigRasc;
+  const det=$('#vigFuncDet'); if(det) det.querySelector('summary').onclick=()=>{ vigFuncAberto=!det.open; };
+  $$('#subBox .vrow input, #subBox .vrow select').forEach(el=>el.onchange=async()=>{
+    const row=el.closest('.vrow'), f=vigilia.funcoes.find(x=>x.id===row.dataset.id); if(!f) return;
+    f.nome=row.querySelector('.vnome').value.trim(); f.area=row.querySelector('.varea').value; f.qtd=Math.max(1,Math.min(20,+row.querySelector('.vqtd').value||1));
+    await persist(); });
+  const campo=(id,k)=>{ const el=$(id); el.oninput=()=>{ v[k]=el.value; if(v.lista) marcarNaoSalva(v,'vigStatus'); }; };
+  campo('#vigData','data'); campo('#vigTema','tema'); campo('#vigHora','hora');
+  const contar=()=>{ const n=v.presentes.length; $('#vigCont').textContent='('+n+' marcada'+(n===1?'':'s')+')'; if(v.lista) marcarNaoSalva(v,'vigStatus'); };
+  $$('#subBox .pres-pick .pick').forEach(el=>el.onclick=()=>{ const id=el.dataset.m, i=v.presentes.indexOf(id);
+    if(i>=0) v.presentes.splice(i,1); else v.presentes.push(id); el.classList.toggle('on',i<0); contar(); });
+  $$('#subBox .pres-todos').forEach(b=>b.onclick=()=>{ const els=$$('#subBox .pres-pick .pick').filter(el=>el.dataset.g===b.dataset.g);
+    const todos=els.every(el=>v.presentes.includes(el.dataset.m));
+    els.forEach(el=>{ const id=el.dataset.m, i=v.presentes.indexOf(id); if(todos){ if(i>=0) v.presentes.splice(i,1); } else if(i<0) v.presentes.push(id); el.classList.toggle('on',!todos); });
+    contar(); });
+  $('#btnGerarVig').onclick=()=>{
+    if(!vigilia.funcoes.length){ toast('Cadastre as funções da vigília primeiro'); return; }
+    const membros=todosMembros().filter(m=>v.presentes.includes(m.id));
+    if(!membros.length){ toast('Marque quem pode ir'); return; }
+    if(v.lista && !v.salvo && !confirm('Gerar outra opção? As trocas que você fez e ainda não salvou vão sumir.')) return;
+    v.lista=gerarVigilia(vigilia.funcoes,membros,80); v.salvo=false; renderVigilia(); toast('Escala da vigília gerada. Confira e salve.'); };
+  const sv=$('#btnSalvarVig'); if(sv) sv.onclick=async()=>{
+    if(!v.data){ toast('Escolha o dia da vigília'); $('#vigData').focus(); return; }
+    const agora=new Date().toISOString();
+    const rec={id:v.id||vid(), data:v.data, tema:v.tema.trim(), hora:v.hora, presentes:v.presentes.slice(), lista:v.lista.map(f=>Object.assign({},f,{pessoas:f.pessoas.slice()})), atualizado_em:agora};
+    const i=vigilia.salvas.findIndex(x=>x.id===rec.id); if(i>=0) vigilia.salvas[i]=rec; else vigilia.salvas.push(rec);
+    v.id=rec.id; v.salvo=true; v.em=agora; await persist(); renderVigilia(); toast('Vigília salva'); };
+  const cp=$('#btnCopiarVig'); if(cp) cp.onclick=()=>copyText(textoVigilia(v),'Escala da vigília copiada');
+  $$('#subBox .vrem').forEach(b=>b.onclick=()=>{ v.lista[+b.dataset.f].pessoas.splice(+b.dataset.p,1); v.salvo=false; renderVigilia(); });
+  $$('#subBox .vadd').forEach(el=>el.onchange=()=>{ if(!el.value) return; v.lista[+el.dataset.f].pessoas.push(el.value); v.salvo=false; renderVigilia(); });
+}
+window.addFuncVig=async()=>{ if(!canEdit()) return; vigilia.funcoes.push({id:fid(), nome:'', area:'qualquer', qtd:1}); vigFuncAberto=true; await persist(); renderVigilia(); const ins=$$('#subBox .vnome'); if(ins.length) ins[ins.length-1].focus(); };
+window.removeFuncVig=async(id)=>{ if(!canEdit()) return; const f=vigilia.funcoes.find(x=>x.id===id); if(!f||!confirm('Remover a função "'+(f.nome||'sem nome')+'"?')) return; vigilia.funcoes=vigilia.funcoes.filter(x=>x.id!==id); vigFuncAberto=true; await persist(); renderVigilia(); };
+window.abrirVig=id=>{ const x=vigilia.salvas.find(s=>s.id===id); if(!x) return;
+  if(vigRasc && vigRasc.lista && !vigRasc.salvo && !confirm('Abrir esta vigília? A escala que ainda não foi salva vai sumir.')) return;
+  vigRasc={id:x.id, data:x.data||'', tema:x.tema||'', hora:x.hora||'', presentes:(x.presentes||[]).slice(), lista:(x.lista||[]).map(f=>Object.assign({},f,{pessoas:(f.pessoas||[]).slice()})), salvo:true, em:x.atualizado_em}; renderVigilia(); };
+window.removerVig=async(id)=>{ if(!canEdit()) return; const x=vigilia.salvas.find(s=>s.id===id); if(!x||!confirm('Remover a vigília de '+(fmtData(x.data)||'sem data')+'?')) return;
+  vigilia.salvas=vigilia.salvas.filter(s=>s.id!==id); if(vigRasc&&vigRasc.id===id) vigRasc=null; await persist(); renderVigilia(); toast('Vigília removida'); };
+window.novaVigilia=()=>{ if(vigRasc && vigRasc.lista && !vigRasc.salvo && !confirm('Começar uma nova? A escala que ainda não foi salva vai sumir.')) return; vigRasc=novaVig(); renderVigilia(); };
+/* ====== FIM IGREJAS, MISSÕES E VIGÍLIA ====== */
 async function copyText(txt,msg){ try{ await navigator.clipboard.writeText(txt); toast(msg); }catch(e){ const ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); toast(msg); }catch(_){ toast('Selecione o texto e copie'); } ta.remove(); } }
 
 function renderConfig(){
@@ -711,8 +1260,8 @@ async function onConfigChange(e){ if(e.target.closest('.trow')){ readTurnosFromD
 window.addTurno=async ()=>{ readTurnosFromDom(); turnos.push({id:tuid(),nome:'',dow:0,hora:'19h',mark:'⬛'}); await persist(); renderConfig(); };
 window.removeTurno=async (id)=>{ readTurnosFromDom(); turnos=turnos.filter(t=>t.id!==id); await persist(); renderConfig(); updatePrompts(); toast('Dia removido'); };
 
-window.exportData=()=>{ const blob=new Blob([JSON.stringify({app:'escala-obra',v:6,pessoas,turnos,escalas},null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='escala-backup.json'; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000); toast('Backup baixado'); };
-function importData(e){ const file=e.target.files[0]; if(!file) return; const rd=new FileReader(); rd.onload=async()=>{ try{ const obj=JSON.parse(rd.result); const arr=Array.isArray(obj)?obj:obj.pessoas; if(!Array.isArray(arr)) throw 0; pessoas=arr.map(normalizePerson); if(obj.turnos) turnos=normalizeTurnos(obj.turnos); if(obj.escalas&&typeof obj.escalas==='object') escalas=obj.escalas; rascunho=null; await persist(); renderAll(); updatePrompts(); if(!$('#view-config').classList.contains('hidden')) renderConfig(); toast('Backup restaurado'); }catch(err){ toast('Arquivo inválido'); } e.target.value=''; }; rd.readAsText(file); }
+window.exportData=()=>{ const blob=new Blob([JSON.stringify({app:'escala-obra',v:8,pessoas,turnos,escalas,igrejas,producao,escalasProd,escalasSemana,vigilia},null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='escala-backup.json'; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000); toast('Backup baixado'); };
+function importData(e){ const file=e.target.files[0]; if(!file) return; const rd=new FileReader(); rd.onload=async()=>{ try{ const obj=JSON.parse(rd.result); const arr=Array.isArray(obj)?obj:obj.pessoas; if(!Array.isArray(arr)) throw 0; pessoas=arr.map(normalizePerson); if(obj.turnos) turnos=normalizeTurnos(obj.turnos); if(obj.escalas&&typeof obj.escalas==='object') escalas=obj.escalas; if(Array.isArray(obj.igrejas)) igrejas=obj.igrejas.map(normalizeIgreja); if(obj.producao) producao=normalizeProducao(obj.producao); if(obj.escalasProd&&typeof obj.escalasProd==='object') escalasProd=obj.escalasProd; if(obj.escalasSemana&&typeof obj.escalasSemana==='object') escalasSemana=obj.escalasSemana; if(obj.vigilia) vigilia=normalizeVigilia(obj.vigilia); rascunho=null; rascSem=null; vigRasc=null; await persist(); renderAll(); updatePrompts(); if(!$('#view-config').classList.contains('hidden')) renderConfig(); if(!$('#view-igrejas').classList.contains('hidden')) renderIgrejas(); toast('Backup restaurado'); }catch(err){ toast('Arquivo inválido'); } e.target.value=''; }; rd.readAsText(file); }
 
 function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 function emptyState(t,s){ return '<div class="empty" style="grid-column:1/-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.5 3-6 7-6s7 2.5 7 6"/><circle cx="18" cy="9" r="2.5"/><path d="M17 14c3 .3 5 2.4 5 6"/></svg><h3>'+t+'</h3><div>'+s+'</div></div>'; }
