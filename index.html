@@ -184,7 +184,8 @@
   .prod-pick{display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:8px; margin-top:12px}
   .prod-sels{flex:1; display:flex; gap:6px; flex-wrap:wrap; min-width:180px} .prod-sels .esc-sel{min-width:120px}
   .prod-func{width:100%; font-size:.78rem; color:var(--muted); padding-left:84px; margin-top:-2px}
-  .subseg{margin-bottom:18px; flex-wrap:wrap}
+  .areaseg .avopt{padding:6px 12px}
+  .vhead{margin-bottom:4px} .vhead span{font-size:.74rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.04em}
   label.field select{font-family:inherit; font-size:.95rem; color:var(--ink); padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:var(--card); font-weight:500}
   .ighead{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
   .ighead .inome{flex:1 1 200px} .ighead .itipo{flex:0 1 230px}
@@ -199,7 +200,7 @@
   .tg.cpm{background:var(--amber-soft); color:var(--amber)} .tg.midia{background:var(--teal-soft); color:var(--teal)}
   .mdates{font-size:.78rem; color:var(--muted)}
   .sem-missao{flex:1 1 100%; max-width:calc(100% - 84px); margin-left:84px}
-  .vrow{display:grid; grid-template-columns:1.4fr 1.2fr 70px auto; gap:8px; align-items:center; margin-bottom:8px}
+  .vrow{display:grid; grid-template-columns:1.4fr 1.2fr auto; gap:8px; align-items:center; margin-bottom:8px}
   .vrow input, .vrow select{width:100%}
   .vig-form{display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px}
   .pres-grupo{margin-top:12px} .pres-grupo h5{margin:0; font-size:.88rem; display:flex; gap:8px; align-items:center}
@@ -209,8 +210,10 @@
   .vchip{display:inline-flex; gap:4px; align-items:center; background:var(--plum-soft); color:var(--plum); font-weight:650; font-size:.85rem; padding:4px 10px; border-radius:20px}
   .vchip.cpm{background:var(--amber-soft); color:var(--amber)}
   .vchip button{border:0; background:none; color:inherit; cursor:pointer; font-size:.8rem; padding:0 2px 0 4px; font-family:inherit}
+  .frow{display:grid; grid-template-columns:1.2fr 1fr auto; gap:8px; align-items:center; margin-bottom:8px}
+  .frow select{font-family:inherit; font-size:.86rem; padding:8px 9px; border:1px solid var(--line); border-radius:9px; background:var(--card); color:var(--ink); min-width:0; width:100%}
   .vfalta{font-size:.76rem; font-weight:700; color:var(--amber); margin-top:8px}
-  @media (max-width:640px){ .sem-missao{max-width:100%; margin-left:0} .vrow{grid-template-columns:1fr 1fr} }
+  @media (max-width:640px){ .sem-missao{max-width:100%; margin-left:0} .vrow{grid-template-columns:1fr 1fr} .vhead{display:none} }
   @media (max-width:640px){ .prod-func{padding-left:0} .irow{grid-template-columns:1fr} }
   .hidden{display:none!important}
   @media (max-width:640px){ .trow{grid-template-columns:1fr 1fr} .trow .tdel{grid-column:1/-1} .slots-pick,.checklist{grid-template-columns:1fr} }
@@ -223,6 +226,7 @@
       <div><h1>Mídia FJU</h1><div class="sub">Escala da equipe e das igrejas</div></div>
     </div>
     <div class="top-actions">
+      <div class="avseg areaseg" id="areaSeg"><button type="button" class="avopt" data-area="escala">📋 Escala</button><button type="button" class="avopt" data-area="igrejas">⛪ Igrejas</button></div>
       <span class="savepill cloud hidden" id="savePill"><span class="d"></span><span id="saveTxt">salvo na nuvem</span></span>
       <span class="viewbadge hidden" id="viewBadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>modo visualização</span>
       <button class="btn ghost sm themebtn" id="themeBtn" title="Modo noturno / claro" aria-label="Alternar modo noturno"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
@@ -232,11 +236,13 @@
   </div>
 
   <div class="tabs" id="tabs">
-    <button class="tab active" data-tab="pessoas">Pessoas <span class="pill" id="cntPessoas">0</span></button>
-    <button class="tab" data-tab="dias">Dias de Reunião/FJU</button>
-    <button class="tab" data-tab="igrejas">Igrejas <span class="pill" id="cntIgrejas">0</span></button>
-    <button class="tab" data-tab="gerar">Escala do mês</button>
-    <button class="tab hidden" id="tabConfig" data-tab="config">Configurações</button>
+    <button class="tab active" data-tab="pessoas" data-area="escala">Pessoas <span class="pill" id="cntPessoas">0</span></button>
+    <button class="tab" data-tab="dias" data-area="escala">Dias de Reunião/FJU</button>
+    <button class="tab" data-tab="gerar" data-area="escala">Escala do mês</button>
+    <button class="tab hidden" id="tabConfig" data-tab="config" data-area="escala">Configurações</button>
+    <button class="tab hidden" data-tab="igrejas" data-area="igrejas">⛪ Igrejas <span class="pill" id="cntIgrejas">0</span></button>
+    <button class="tab hidden" data-tab="semana" data-area="igrejas">📅 Missões da semana</button>
+    <button class="tab hidden" data-tab="vigilia" data-area="igrejas">🌙 Vigília</button>
   </div>
 
   <div id="view-pessoas">
@@ -255,7 +261,7 @@
 
   <div id="view-dias" class="hidden"></div>
 
-  <div id="view-igrejas" class="hidden"></div>
+  <div id="view-igrejas" class="hidden"><div id="subBox"></div></div>
 
   <div id="view-gerar" class="hidden">
     <div class="gen-config">
@@ -317,6 +323,18 @@
   </div>
 </div>
 
+<div class="overlay" id="fixoOverlay">
+  <div class="modal" style="max-width:540px">
+    <div class="mhead"><h3>Tem alguém com função fixa?</h3><button class="btn ghost sm" id="fxClose">✕</button></div>
+    <div class="mbody">
+      <p class="hint" id="fxPerg" style="margin:0">Função fixa é quando a pessoa já está certa numa função da vigília. Ela fica só nela, e a divisão conta com ela: se a função só precisaria de uma pessoa, fica só ela.</p>
+      <div id="fxLista"></div>
+      <div><button class="btn sm" id="fxAdd" type="button">+ Pessoa com função fixa</button></div>
+    </div>
+    <div class="mfoot"><button class="btn ghost" id="fxNao">Não, só gerar</button><button class="btn primary" id="fxSim">Sim, escolher</button></div>
+  </div>
+</div>
+
 <div class="overlay" id="loginOverlay">
   <div class="modal" style="max-width:420px">
     <div class="mhead"><h3>Entrar como administrador</h3><button class="btn ghost sm" id="loginClose">✕</button></div>
@@ -345,6 +363,7 @@ const DOW = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
 const SHORT = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
 const MARKS = ['⬛','🟥','◻','🟦','🟩','⭐','✅'];
 const AREAS = [ {k:'jornalismo',l:'Jornalismo'},{k:'fotografia',l:'Fotografia'},{k:'design',l:'Design'} ];
+const AREAS_IG = AREAS.concat([{k:'postagem',l:'Postagem'}]); // pessoas das igrejas também marcam Postagem
 const AV_OPTS = [['nao','Não'],['gravar','Gravar'],['editar','Editar'],['ambos','Ambos']];
 const AV_LABEL = {gravar:'gravar', editar:'editar', ambos:'gravar e editar'};
 
@@ -404,7 +423,7 @@ const labelOf = t=> t.nome + (t.hora?(' ('+t.hora+')'):'');
 const allTurnos = ()=> turnos;
 const EDITORES = ['joaopcostaferreira@gmail.com']; // contas Google que podem editar (as regras do Firestore usam a mesma lista)
 const canEdit = ()=> Auth.logged() && EDITORES.includes(Auth.email().toLowerCase());
-function areasText(p){ const a=p.areas||{}; const out=[]; AREAS.forEach(x=>{ if(a[x.k]) out.push(x.l); }); if(a.av&&a.av!=='nao') out.push('Áudio Visual ('+AV_LABEL[a.av]+')'); return out; }
+function areasText(p,lista){ const a=p.areas||{}; const out=[]; (lista||AREAS).forEach(x=>{ if(a[x.k]) out.push(x.l); }); if(a.av&&a.av!=='nao') out.push('Áudio Visual ('+AV_LABEL[a.av]+')'); return out; }
 function dayTags(p){ return turnos.filter(t=>p.disp?.[t.id]).map(t=>({t:SHORT[t.dow]+' '+(t.hora||''), c:t.dow===6?'':'reu'})); }
 
 async function boot(){
@@ -413,7 +432,7 @@ async function boot(){
   buildModalStatics(); buildMembroModal(); bindEvents();
   const d=new Date(); if(d.getDate()>=20) d.setMonth(d.getMonth()+1,1); // a partir do dia 20 já abre o mês seguinte
   $('#genMonth').value=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
-  applyMode(); renderAll(); updatePrompts();
+  applyMode(); renderAll(); updatePrompts(); setArea(areaApp);
 }
 async function loadData(){
   let data=null;
@@ -445,8 +464,7 @@ function setSave(state){ const p=$('#savePill'); p.className='savepill '+state+(
 
 function applyMode(){
   const can=canEdit();
-  $('#btnAdd').classList.toggle('hidden',!can);
-  $('#tabConfig').classList.toggle('hidden',!can);
+  atualizarAbas();
   $('#savePill').classList.toggle('hidden',!can);
   $('#viewBadge').classList.toggle('hidden',can);
   $('#authBtn').textContent = can ? ('Sair'+(Auth.email()?' · '+Auth.email():'')) : 'Entrar';
@@ -464,6 +482,7 @@ function buildModalStatics(){
 }
 function bindEvents(){
   $$('.tab').forEach(t=> t.onclick=()=>switchTab(t.dataset.tab));
+  $$('#areaSeg .avopt').forEach(b=> b.onclick=()=>setArea(b.dataset.area));
   $('#btnAdd').onclick=()=>{ if(canEdit()) openModal(); };
   $('#btnClose').onclick=$('#btnCancel').onclick=closeModal;
   $('#overlay').onclick=e=>{ if(e.target.id==='overlay') closeModal(); };
@@ -494,11 +513,26 @@ async function doLogin(){
   finally{ $('#loginBtn').textContent='Entrar com Google'; }
 }
 
+/* O app tem duas partes, trocadas pela chave do topo:
+   Escala (Pessoas, Dias, Escala do mês, Configurações) e Igrejas (Igrejas, Missões da semana, Vigília). */
+const ABAS_IGREJA=['igrejas','semana','vigilia'];
+let areaApp = LS.get('escala_area')==='igrejas' ? 'igrejas' : 'escala';
+let ultimaEscala = 'pessoas';
+function atualizarAbas(){
+  const can=canEdit();
+  $$('.tab').forEach(t=>t.classList.toggle('hidden', t.dataset.area!==areaApp || (t.dataset.tab==='config'&&!can)));
+  $('#btnAdd').classList.toggle('hidden', !can || areaApp!=='escala');
+  $$('#areaSeg .avopt').forEach(b=>b.classList.toggle('on',b.dataset.area===areaApp));
+  $('.sub').textContent = areaApp==='igrejas' ? 'Igrejas, missões da semana e vigília' : 'Escala da equipe de mídia';
+}
+function setArea(a){ areaApp=a; LS.set('escala_area',a); atualizarAbas(); switchTab(a==='igrejas'?subIgreja:ultimaEscala); }
 function switchTab(name){
+  const ig=ABAS_IGREJA.includes(name);
+  if(ig){ subIgreja=name; LS.set('escala_subigreja',name); } else ultimaEscala=name;
   $$('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===name));
-  ['pessoas','dias','igrejas','gerar','config'].forEach(v=>$('#view-'+v).classList.toggle('hidden',v!==name));
+  ['pessoas','dias','igrejas','gerar','config'].forEach(v=>$('#view-'+v).classList.toggle('hidden',v!==(ig?'igrejas':name)));
   if(name==='dias') renderDayView();
-  if(name==='igrejas') renderIgrejas();
+  if(ig) renderIgrejas();
   if(name==='gerar'){ updatePrompts(); renderEscala(); }
   if(name==='config') renderConfig();
 }
@@ -857,37 +891,48 @@ function analisarProd(sl,ctx,igrejas,diasSemana){
 /* ====== FIM DO MOTOR DAS MISSÕES ====== */
 
 /* ====== MOTOR DA VIGÍLIA ======
-   Cada função tem a área que a pessoa precisa saber e quantas pessoas leva.
-   Primeiro todo mundo ganha uma função; só repete pessoa quando faltar gente.
-   O primeiro de cada função é de preferência um mídia (os CPMs ainda estão em formação). */
+   Cada função tem a área que a pessoa precisa ter no cadastro da igreja.
+   Todo mundo que foi marcado entra, cada um numa função só, dividido o mais igual possível.
+   Quem tem função fixa fica só nela e conta na divisão daquela função.
+   O ideal é cada função ter pelo menos um mídia (os CPMs ainda estão em formação). */
 function qualifica(m,area){ const a=m.areas||{}, av=a.av||'nao';
-  if(area==='qualquer') return true;
+  if(area==='qualquer') return true; // formato antigo
   if(area==='av_gravar') return av==='gravar'||av==='ambos';
   if(area==='av_editar') return av==='editar'||av==='ambos';
-  if(area==='av') return av!=='nao';
+  if(area==='av') return av==='ambos'; // audiovisual sozinho = gravar e editar
   return !!a[area];
 }
-function gerarVigilia(funcs,membros,tentativas){
+function gerarVigilia(funcs,membros,tentativas,fixos){
+  fixos=fixos||{}; // id da pessoa -> id da função fixa
+  const porId={}; membros.forEach(m=>porId[m.id]=m);
+  const ehFixo=m=>!!fixos[m.id] && funcs.some(f=>f.id===fixos[m.id]);
+  const opc={}; membros.forEach(m=>{ if(!ehFixo(m)) opc[m.id]=funcs.map((f,i)=>i).filter(i=>qualifica(m,funcs[i].area)); });
+  const livres=membros.filter(m=>!ehFixo(m) && opc[m.id].length);
+  const nota=lista=>{ let s=0; lista.forEach(f=>{ const n=f.pessoas.length; if(!n) s+=1000; s+=n*n*40; if(n && f.pessoas.every(id=>(porId[id]||{}).papel==='cpm')) s+=30; }); return s; };
   let melhor=null, melhorS=Infinity;
   for(let t=0;t<(tentativas||60);t++){
-    const uso={}; membros.forEach(m=>uso[m.id]=0);
-    const lista=funcs.map(f=>({fid:f.id, nome:f.nome, area:f.area, qtd:Math.max(1,+f.qtd||1), pessoas:[]}));
-    const nQual=f=>membros.filter(m=>qualifica(m,f.area)).length;
-    const ordem=lista.slice().sort((a,b)=>nQual(a)-nQual(b)||Math.random()-.5); // função com menos gente que sabe primeiro
-    const maxQ=Math.max(1,...lista.map(l=>l.qtd));
-    for(let k=0;k<maxQ;k++) for(const f of ordem){
-      if(f.pessoas.length>=f.qtd) continue;
-      const cands=membros.filter(m=>qualifica(m,f.area) && !f.pessoas.includes(m.id)); if(!cands.length) continue;
-      const min=Math.min(...cands.map(m=>uso[m.id])); let bons=cands.filter(m=>uso[m.id]===min);
-      if(!f.pessoas.length){ const md=bons.filter(m=>m.papel!=='cpm'); if(md.length) bons=md; }
-      const p=bons[Math.floor(Math.random()*bons.length)]; f.pessoas.push(p.id); uso[p.id]++;
-    }
-    membros.filter(m=>!uso[m.id]).forEach(m=>{ // quem sobrou reforça uma função que sabe fazer
-      const fs=lista.filter(f=>qualifica(m,f.area)); if(!fs.length) return;
-      fs.sort((a,b)=>a.pessoas.length/a.qtd-b.pessoas.length/b.qtd||Math.random()-.5); fs[0].pessoas.push(m.id); uso[m.id]++;
-    });
-    let s=0; lista.forEach(f=>{ s+=Math.max(0,f.qtd-f.pessoas.length)*1000; if(f.pessoas.length && f.pessoas.every(id=>(membros.find(m=>m.id===id)||{}).papel==='cpm')) s+=30; });
-    membros.forEach(m=>{ s+=Math.max(0,uso[m.id]-1)*50; if(!uso[m.id]) s+=20; });
+    const lista=funcs.map(f=>({fid:f.id, nome:f.nome, area:f.area, fixos:[], pessoas:[]}));
+    membros.forEach(m=>{ if(!ehFixo(m)) return; const i=funcs.findIndex(f=>f.id===fixos[m.id]); lista[i].pessoas.push(m.id); lista[i].fixos.push(m.id); });
+    const onde={};
+    const resto=livres.slice().sort((a,b)=>opc[a.id].length-opc[b.id].length||Math.random()-.5);
+    // 1) cada função vazia ganha alguém (a que tem menos gente que sabe vem primeiro), de preferência um mídia
+    const nCand=i=>resto.filter(m=>opc[m.id].includes(i)).length;
+    lista.map((f,i)=>i).filter(i=>!lista[i].pessoas.length).sort((a,b)=>nCand(a)-nCand(b)||Math.random()-.5).forEach(i=>{
+      let c=resto.filter(m=>onde[m.id]===undefined && opc[m.id].includes(i)); if(!c.length) return;
+      const md=c.filter(m=>m.papel!=='cpm'); if(md.length) c=md;
+      const minO=Math.min(...c.map(m=>opc[m.id].length)); c=c.filter(m=>opc[m.id].length===minO);
+      const pz=c[Math.floor(Math.random()*c.length)]; onde[pz.id]=i; lista[i].pessoas.push(pz.id); });
+    // 2) o resto vai para a função que sabe fazer e está com menos gente
+    resto.forEach(m=>{ if(onde[m.id]!==undefined) return; const min=Math.min(...opc[m.id].map(i=>lista[i].pessoas.length));
+      const op=opc[m.id].filter(i=>lista[i].pessoas.length===min); const i=op[Math.floor(Math.random()*op.length)]; onde[m.id]=i; lista[i].pessoas.push(m.id); });
+    // 3) ajuste: muda alguém de função quando a divisão fica melhor
+    let s=nota(lista), mudou=true, voltas=0;
+    while(mudou && voltas++<30){ mudou=false;
+      for(const m of resto){ const de=onde[m.id];
+        for(const para of opc[m.id]){ if(para===de) continue;
+          const a=lista[de].pessoas, b=lista[para].pessoas; a.splice(a.indexOf(m.id),1); b.push(m.id);
+          const s2=nota(lista); if(s2<s){ s=s2; onde[m.id]=para; mudou=true; break; }
+          b.pop(); a.push(m.id); } } }
     if(s<melhorS){ melhorS=s; melhor=lista; }
   }
   return melhor||[];
@@ -906,13 +951,14 @@ const FUNCAO_PADRAO = {
 const RODAPE_SEMANA = '⏰ *Entrega máxima:* até as 18h do dia da missão.\n☀️ *Domingo:* até as 19h.';
 const EMO_DIA = ['🙌','🔥','💪','✨','🚀','🎉'];
 const VIG_PADRAO = [
-  {nome:'📸 Fotografia', area:'fotografia', qtd:1},
-  {nome:'🎨 Design', area:'design', qtd:1},
-  {nome:'📱 Postagem', area:'qualquer', qtd:1},
-  {nome:'🎥 Vídeos', area:'av_gravar', qtd:1},
-  {nome:'🎬 Edição de vídeo', area:'av_editar', qtd:1}
+  {nome:'📸 Fotografia', area:'fotografia'},
+  {nome:'🎨 Design', area:'design'},
+  {nome:'📰 Jornalismo', area:'jornalismo'},
+  {nome:'📱 Postagem', area:'postagem'},
+  {nome:'🎥 Vídeos', area:'av_gravar'},
+  {nome:'🎬 Edição de vídeo', area:'av_editar'}
 ];
-const AREA_VIG = [['qualquer','Qualquer pessoa'],['fotografia','Fotografia'],['design','Design'],['jornalismo','Jornalismo'],['av','Audiovisual'],['av_gravar','Audiovisual – gravar'],['av_editar','Audiovisual – editar']];
+const AREA_VIG = [['fotografia','Fotografia'],['design','Design'],['jornalismo','Jornalismo'],['postagem','Postagem'],['av','Audiovisual – gravar e editar'],['av_gravar','Audiovisual – só gravar'],['av_editar','Audiovisual – só editar']];
 const CBOX = '<span class="cbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span>';
 
 const iuid = ()=>'i'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
@@ -930,21 +976,24 @@ function normalizeProducao(p){
   if(!p || !Array.isArray(p.dias)) return defaultProducao();
   return {dias:p.dias.map(d=>({dow:+d.dow, funcao:d.funcao||''})).filter(d=>d.dow>=0&&d.dow<=5), rodape:(typeof p.rodape==='string')?p.rodape:RODAPE_SEMANA};
 }
-function normalizeMembro(m){ return {id:m.id||mid(), nome:m.nome||'', papel:m.papel==='cpm'?'cpm':'midia', areas:Object.assign({jornalismo:false,fotografia:false,design:false,av:'nao'},m.areas||{}), obs:m.obs||'', dataCpm:m.dataCpm||'', dataMidia:m.dataMidia||''}; }
+function normalizeMembro(m){ return {id:m.id||mid(), nome:m.nome||'', papel:m.papel==='cpm'?'cpm':'midia', areas:Object.assign({jornalismo:false,fotografia:false,design:false,postagem:false,av:'nao'},m.areas||{}), obs:m.obs||'', dataCpm:m.dataCpm||'', dataMidia:m.dataMidia||''}; }
 function normalizeIgreja(i){ return {id:i.id||iuid(), nome:i.nome||'', tipo:i.tipo==='pequena'?'pequena':'independente', pessoas:(Array.isArray(i.pessoas)?i.pessoas:[]).map(normalizeMembro)}; }
 function normalizeVigilia(v){
-  const funcoes = (v && Array.isArray(v.funcoes)) ? v.funcoes : VIG_PADRAO;
-  return {funcoes:funcoes.map(f=>({id:f.id||fid(), nome:f.nome||'', area:AREA_VIG.some(a=>a[0]===f.area)?f.area:'qualquer', qtd:Math.max(1,+f.qtd||1)})),
+  let funcoes = (v && Array.isArray(v.funcoes)) ? v.funcoes.slice() : VIG_PADRAO;
+  if(v && Array.isArray(v.funcoes) && !(v.v>=2)){ // versão antiga: "qualquer pessoa" vira Postagem e entra a função Jornalismo
+    funcoes=funcoes.map(f=>f.area==='qualquer'?Object.assign({},f,{area:'postagem'}):f);
+    if(!funcoes.some(f=>f.area==='jornalismo')) funcoes.splice(Math.min(2,funcoes.length),0,{nome:'📰 Jornalismo', area:'jornalismo'});
+  }
+  return {v:2, funcoes:funcoes.map(f=>({id:f.id||fid(), nome:f.nome||'', area:AREA_VIG.some(a=>a[0]===f.area)?f.area:'postagem'})),
           salvas:(v && Array.isArray(v.salvas)) ? v.salvas : []};
 }
 
 const nomeIgreja = id => { const i=igrejas.find(x=>x.id===id); return i?(i.nome||'Sem nome'):'(igreja removida)'; };
 const nomesUnidade = ids => ids.length ? ids.map(nomeIgreja).join(' e ') : '(nenhuma igreja)';
 const diasSemanaAtivos = ()=> ORDEM_SEMANA.map(w=>producao.dias.find(d=>d.dow===w)).filter(Boolean);
-function todosMembros(){ // pessoas das igrejas + a equipe da aba Pessoas
+function todosMembros(){ // só as pessoas cadastradas dentro das igrejas (a aba Pessoas é da escala, separada)
   const out=[];
   igrejas.forEach(i=>i.pessoas.forEach(m=>out.push({id:m.id, nome:m.nome, papel:m.papel, areas:m.areas, grupo:i.id, grupoNome:i.nome||'Sem nome'})));
-  pessoas.forEach(p=>out.push({id:p.id, nome:p.nome, papel:p.aprendizado?'cpm':'midia', areas:p.areas||{}, grupo:'_equipe', grupoNome:'Equipe Mídia (aba Pessoas)'}));
   return out;
 }
 const nomeMembro = id => { const m=todosMembros().find(x=>x.id===id); return m?m.nome:'(pessoa removida)'; };
@@ -954,15 +1003,12 @@ const igAbertas = new Set();
 let semDom=null, rascSem=null, semCfgAberto=null, vigRasc=null, vigVer=null, vigFuncAberto=false;
 
 function renderIgrejas(){
-  const box=$('#view-igrejas');
-  box.innerHTML='<div class="avseg subseg" id="subSeg">'+[['igrejas','⛪ Igrejas'],['semana','📅 Missões da semana'],['vigilia','🌙 Vigília']].map(o=>'<button type="button" class="avopt'+(subIgreja===o[0]?' on':'')+'" data-sub="'+o[0]+'">'+o[1]+'</button>').join('')+'</div><div id="subBox"></div>';
-  $$('#subSeg .avopt').forEach(b=>b.onclick=()=>{ subIgreja=b.dataset.sub; LS.set('escala_subigreja',subIgreja); renderIgrejas(); });
   if(subIgreja==='semana') renderSemana(); else if(subIgreja==='vigilia') renderVigilia(); else renderListaIgrejas();
 }
 
 /* ---------- Igrejas e pessoas ---------- */
 function membroCard(i,m,can){
-  const ar=areasText(m);
+  const ar=areasText(m,AREAS_IG);
   const datas=[m.dataCpm?'CPM desde '+fmtData(m.dataCpm):'', (m.papel!=='cpm'&&m.dataMidia)?'Mídia desde '+fmtData(m.dataMidia):''].filter(Boolean).join(' · ');
   return '<div class="mcard'+(m.papel==='cpm'?' cpm':'')+'"><div class="pname" style="font-size:.95rem">'+esc(m.nome)+'</div>'+
     '<div class="tags"><span class="tg '+(m.papel==='cpm'?'cpm':'midia')+'">'+(m.papel==='cpm'?'CPM':'Mídia')+'</span>'+ar.map(a=>'<span class="tg">'+esc(a)+'</span>').join('')+'</div>'+
@@ -1012,7 +1058,7 @@ window.removeMembro=async(igId,id)=>{ if(!canEdit()) return; const i=igrejas.fin
 
 let mEdit=null, mDraft=null;
 function buildMembroModal(){
-  $('#mAreaList').innerHTML=AREAS.map(a=>'<div class="chk" data-area="'+a.k+'">'+CBOX+a.l+'</div>').join('');
+  $('#mAreaList').innerHTML=AREAS_IG.map(a=>'<div class="chk" data-area="'+a.k+'">'+CBOX+a.l+'</div>').join('');
   $('#mAvSeg').innerHTML=AV_OPTS.map(o=>'<button type="button" class="avopt" data-av="'+o[0]+'">'+o[1]+'</button>').join('');
   $('#papelSeg').innerHTML='<button type="button" class="avopt" data-papel="midia">Mídia</button><button type="button" class="avopt" data-papel="cpm">CPM (em formação)</button>';
   $$('#mAreaList .chk').forEach(el=>el.onclick=()=>{ const k=el.dataset.area; mDraft.areas[k]=!mDraft.areas[k]; pintarMembro(); });
@@ -1031,7 +1077,7 @@ function pintarMembro(){
 }
 function abrirMembro(igId,m){
   mEdit={ig:igId, id:m?m.id:null};
-  mDraft={papel:m?m.papel:'midia', areas:Object.assign({jornalismo:false,fotografia:false,design:false,av:'nao'}, m?m.areas:{})};
+  mDraft={papel:m?m.papel:'midia', areas:Object.assign({jornalismo:false,fotografia:false,design:false,postagem:false,av:'nao'}, m?m.areas:{})};
   $('#mTitle').textContent=m?'Editar pessoa':'Nova pessoa da igreja';
   $('#mIgreja').innerHTML=igrejas.map(i=>'<option value="'+i.id+'"'+(i.id===igId?' selected':'')+'>'+esc(i.nome||'Sem nome')+'</option>').join('');
   $('#mNome').value=m?m.nome:''; $('#mObs').value=m?m.obs:''; $('#mDataCpm').value=m?m.dataCpm:''; $('#mDataMidia').value=m?m.dataMidia:'';
@@ -1140,7 +1186,7 @@ function bindSemana(){
 }
 
 /* ---------- Vigília ---------- */
-function novaVig(){ return {id:null, data:'', tema:'', hora:'', presentes:[], lista:null, salvo:false}; }
+function novaVig(){ return {id:null, data:'', tema:'', hora:'', presentes:[], fixos:[], lista:null, salvo:false}; }
 const vigiliasOrdenadas = ()=> vigilia.salvas.slice().sort((a,b)=>(b.data||'').localeCompare(a.data||''));
 function textoVigilia(v){
   const tema=(v.tema||'').trim().replace(/^vig[ií]lia\s*/i,'');
@@ -1155,14 +1201,15 @@ function vigResultado(v,edit){
   const presentes=todos.filter(m=>v.presentes.includes(m.id));
   const opt=m=>'<option value="'+m.id+'">'+esc(m.nome)+(m.papel==='cpm'?' (CPM)':'')+'</option>';
   let h='<div class="esc-grid">'+v.lista.map((f,fi)=>{
-    const chips=f.pessoas.map((id,pi)=>{ const m=porId[id]; return '<span class="vchip'+(m&&m.papel==='cpm'?' cpm':'')+'">'+esc(m?m.nome:'(pessoa removida)')+(m&&m.papel==='cpm'?' · CPM':'')+(edit?'<button type="button" class="vrem" data-f="'+fi+'" data-p="'+pi+'" title="Tirar desta função">✕</button>':'')+'</span>'; }).join('');
+    const chips=f.pessoas.map((id,pi)=>{ const m=porId[id]; return '<span class="vchip'+(m&&m.papel==='cpm'?' cpm':'')+'">'+((f.fixos||[]).includes(id)?'<span title="Função fixa">📌</span>':'')+esc(m?m.nome:'(pessoa removida)')+(m&&m.papel==='cpm'?' · CPM':'')+(edit?'<button type="button" class="vrem" data-f="'+fi+'" data-p="'+pi+'" title="Tirar desta função">✕</button>':'')+'</span>'; }).join('');
     let add='';
     if(edit){ const ops=presentes.filter(m=>!f.pessoas.includes(m.id)), q=ops.filter(m=>qualifica(m,f.area)), nq=ops.filter(m=>!qualifica(m,f.area));
       if(ops.length) add='<select class="esc-sel vadd" data-f="'+fi+'"><option value="">+ adicionar pessoa</option>'+q.map(opt).join('')+(nq.length?'<optgroup label="Não marcou essa área">'+nq.map(opt).join('')+'</optgroup>':'')+'</select>'; }
-    const falta=f.qtd-f.pessoas.length;
+    const falta=!f.pessoas.length;
     return '<div class="esc-turno"><h4>'+esc(f.nome||'Sem nome')+'</h4><div class="vchips">'+(chips||'<span class="mdates">ninguém ainda</span>')+'</div>'+
-      (edit&&falta>0?'<div class="vfalta">⚠ falta'+(falta>1?'m '+falta+' pessoas':' 1 pessoa')+' que saiba essa área</div>':'')+(add?'<div style="margin-top:10px">'+add+'</div>':'')+'</div>';
+      (edit&&falta?'<div class="vfalta">⚠ ninguém nesta função: falta quem tenha essa área marcada</div>':'')+(add?'<div style="margin-top:10px">'+add+'</div>':'')+'</div>';
   }).join('')+'</div>';
+  if(v.lista.some(f=>(f.fixos||[]).length)) h+='<p class="cfg-note">📌 = função fixa</p>';
   if(edit){ const sem=presentes.filter(m=>!v.lista.some(f=>f.pessoas.includes(m.id))); if(sem.length) h+='<p class="cfg-note">Sem função: '+sem.map(m=>esc(m.nome)).join(', ')+'. Dá para pôr pelo “+ adicionar pessoa” em alguma função.</p>'; }
   return h;
 }
@@ -1182,15 +1229,16 @@ function renderVigilia(){
   if(!vigRasc) vigRasc=novaVig();
   const v=vigRasc; let html='';
   html+='<details class="cfg-card esc-ant" id="vigFuncDet"'+(vigFuncAberto||!vigilia.funcoes.length?' open':'')+'><summary>Funções da vigília ('+vigilia.funcoes.length+')</summary>'+
-    '<p style="margin:8px 0 10px">Nome da função (pode pôr emoji), quem pode fazer e quantas pessoas ela leva.</p>'+
-    vigilia.funcoes.map(f=>'<div class="vrow" data-id="'+f.id+'"><input class="vnome" value="'+esc(f.nome)+'" placeholder="Ex: 📸 Fotografia"><select class="varea">'+AREA_VIG.map(a=>'<option value="'+a[0]+'"'+(a[0]===f.area?' selected':'')+'>'+a[1]+'</option>').join('')+'</select><input class="vqtd" type="number" min="1" max="20" value="'+f.qtd+'" title="Quantas pessoas"><button class="btn danger sm" onclick="removeFuncVig(\''+f.id+'\')">Remover</button></div>').join('')+
+    '<p style="margin:8px 0 10px">Para cada função: o nome (pode pôr emoji) e a área que a pessoa precisa ter marcada no cadastro da igreja. Quem for marcado na vigília é dividido entre as funções, o mais igual possível.</p>'+
+    (vigilia.funcoes.length?'<div class="vrow vhead"><span>Função</span><span>Quem pode fazer</span><span></span></div>':'')+
+    vigilia.funcoes.map(f=>'<div class="vrow" data-id="'+f.id+'"><input class="vnome" value="'+esc(f.nome)+'" placeholder="Ex: 📸 Fotografia"><select class="varea">'+AREA_VIG.map(a=>'<option value="'+a[0]+'"'+(a[0]===f.area?' selected':'')+'>'+a[1]+'</option>').join('')+'</select><button class="btn danger sm" onclick="removeFuncVig(\''+f.id+'\')">Remover</button></div>').join('')+
     '<button class="btn sm" style="margin-top:4px" onclick="addFuncVig()">+ Adicionar função</button></details>';
   if(vs.length) html+='<details class="cfg-card esc-ant"><summary>Vigílias salvas ('+vs.length+')</summary>'+vs.map(x=>'<div class="trow2"><span>'+esc(fmtData(x.data)||'sem data')+(x.tema?' · '+esc(x.tema):'')+'</span><button class="btn sm" onclick="abrirVig(\''+x.id+'\')">Abrir</button><button class="btn danger sm" onclick="removerVig(\''+x.id+'\')">Remover</button></div>').join('')+'</details>';
   html+='<div class="gen-config"><div class="esc-actions" style="margin-bottom:12px"><strong>'+(v.id?'Vigília salva':'Nova escala de vigília')+'</strong>'+(v.id?'<button class="btn sm" onclick="novaVigilia()">+ Nova vigília</button>':'')+'</div>'+
     '<div class="vig-form"><label class="field">Dia<input type="date" id="vigData" value="'+esc(v.data)+'"></label><label class="field">Tema / nome da vigília<input id="vigTema" value="'+esc(v.tema)+'" placeholder="Ex: da Virada"></label><label class="field">Mídias se reúnem às<input type="time" id="vigHora" value="'+esc(v.hora)+'"></label></div>';
   const grupos=[]; todosMembros().forEach(m=>{ let g=grupos.find(x=>x.id===m.grupo); if(!g){ g={id:m.grupo, nome:m.grupoNome, ms:[]}; grupos.push(g); } g.ms.push(m); });
   html+='<div class="blk-t" style="margin-top:18px">Quem pode ir <span style="font-weight:500" id="vigCont">('+v.presentes.length+' marcada'+(v.presentes.length===1?'':'s')+')</span></div>';
-  if(!grupos.length) html+='<p class="hint">Cadastre as pessoas dentro das igrejas (em “⛪ Igrejas”) para elas aparecerem aqui.</p>';
+  if(!grupos.length) html+='<p class="hint">Cadastre as pessoas dentro das igrejas (aba “⛪ Igrejas” → Ver pessoas) para elas aparecerem aqui.</p>';
   grupos.forEach(g=>{ html+='<div class="pres-grupo"><h5>'+esc(g.nome)+'<button type="button" class="btn ghost sm pres-todos" data-g="'+g.id+'">Marcar todos</button></h5><div class="prod-pick pres-pick">'+
     g.ms.map(m=>'<div class="pick'+(v.presentes.includes(m.id)?' on':'')+'" data-m="'+m.id+'" data-g="'+g.id+'">'+CBOX+'<span class="pnome">'+esc(m.nome)+'</span>'+(m.papel==='cpm'?'<small>CPM</small>':'')+'</div>').join('')+'</div></div>'; });
   html+='</div>';
@@ -1203,7 +1251,7 @@ function bindVigilia(){
   const det=$('#vigFuncDet'); if(det) det.querySelector('summary').onclick=()=>{ vigFuncAberto=!det.open; };
   $$('#subBox .vrow input, #subBox .vrow select').forEach(el=>el.onchange=async()=>{
     const row=el.closest('.vrow'), f=vigilia.funcoes.find(x=>x.id===row.dataset.id); if(!f) return;
-    f.nome=row.querySelector('.vnome').value.trim(); f.area=row.querySelector('.varea').value; f.qtd=Math.max(1,Math.min(20,+row.querySelector('.vqtd').value||1));
+    f.nome=row.querySelector('.vnome').value.trim(); f.area=row.querySelector('.varea').value;
     await persist(); });
   const campo=(id,k)=>{ const el=$(id); el.oninput=()=>{ v[k]=el.value; if(v.lista) marcarNaoSalva(v,'vigStatus'); }; };
   campo('#vigData','data'); campo('#vigTema','tema'); campo('#vigHora','hora');
@@ -1219,22 +1267,56 @@ function bindVigilia(){
     const membros=todosMembros().filter(m=>v.presentes.includes(m.id));
     if(!membros.length){ toast('Marque quem pode ir'); return; }
     if(v.lista && !v.salvo && !confirm('Gerar outra opção? As trocas que você fez e ainda não salvou vão sumir.')) return;
-    v.lista=gerarVigilia(vigilia.funcoes,membros,80); v.salvo=false; renderVigilia(); toast('Escala da vigília gerada. Confira e salve.'); };
+    abrirFixos(); };
   const sv=$('#btnSalvarVig'); if(sv) sv.onclick=async()=>{
     if(!v.data){ toast('Escolha o dia da vigília'); $('#vigData').focus(); return; }
     const agora=new Date().toISOString();
-    const rec={id:v.id||vid(), data:v.data, tema:v.tema.trim(), hora:v.hora, presentes:v.presentes.slice(), lista:v.lista.map(f=>Object.assign({},f,{pessoas:f.pessoas.slice()})), atualizado_em:agora};
+    const rec={id:v.id||vid(), data:v.data, tema:v.tema.trim(), hora:v.hora, presentes:v.presentes.slice(), fixos:(v.fixos||[]).map(x=>({m:x.m,f:x.f})), lista:v.lista.map(f=>Object.assign({},f,{pessoas:f.pessoas.slice(), fixos:(f.fixos||[]).slice()})), atualizado_em:agora};
     const i=vigilia.salvas.findIndex(x=>x.id===rec.id); if(i>=0) vigilia.salvas[i]=rec; else vigilia.salvas.push(rec);
     v.id=rec.id; v.salvo=true; v.em=agora; await persist(); renderVigilia(); toast('Vigília salva'); };
   const cp=$('#btnCopiarVig'); if(cp) cp.onclick=()=>copyText(textoVigilia(v),'Escala da vigília copiada');
-  $$('#subBox .vrem').forEach(b=>b.onclick=()=>{ v.lista[+b.dataset.f].pessoas.splice(+b.dataset.p,1); v.salvo=false; renderVigilia(); });
+  $$('#subBox .vrem').forEach(b=>b.onclick=()=>{ const f=v.lista[+b.dataset.f], id=f.pessoas.splice(+b.dataset.p,1)[0]; if(f.fixos) f.fixos=f.fixos.filter(x=>x!==id); v.salvo=false; renderVigilia(); });
   $$('#subBox .vadd').forEach(el=>el.onchange=()=>{ if(!el.value) return; v.lista[+el.dataset.f].pessoas.push(el.value); v.salvo=false; renderVigilia(); });
 }
-window.addFuncVig=async()=>{ if(!canEdit()) return; vigilia.funcoes.push({id:fid(), nome:'', area:'qualquer', qtd:1}); vigFuncAberto=true; await persist(); renderVigilia(); const ins=$$('#subBox .vnome'); if(ins.length) ins[ins.length-1].focus(); };
+/* função fixa: perguntada a cada "Gerar escala" */
+let fxRasc=[], fxSim=false;
+const presentesVig=()=>todosMembros().filter(m=>vigRasc.presentes.includes(m.id));
+function gerarAgoraVig(){ const v=vigRasc, mapa={}; (v.fixos||[]).forEach(x=>mapa[x.m]=x.f);
+  v.lista=gerarVigilia(vigilia.funcoes,presentesVig(),80,mapa); v.salvo=false; renderVigilia(); toast('Escala da vigília gerada. Confira e salve.'); }
+function abrirFixos(){ const v=vigRasc;
+  fxRasc=(v.fixos||[]).filter(x=>v.presentes.includes(x.m) && vigilia.funcoes.some(f=>f.id===x.f)).map(x=>({m:x.m,f:x.f}));
+  fxSim=fxRasc.length>0; pintarFixos(); $('#fixoOverlay').classList.add('show'); }
+function novoFixo(){ const livre=presentesVig().find(m=>!fxRasc.some(x=>x.m===m.id)); if(!livre) return;
+  const f=vigilia.funcoes.find(f=>qualifica(livre,f.area))||vigilia.funcoes[0]; fxRasc.push({m:livre.id, f:f.id}); }
+function pintarFixos(){
+  const pres=presentesVig(), grupos=[];
+  pres.forEach(m=>{ let g=grupos.find(x=>x.id===m.grupo); if(!g){ g={id:m.grupo, nome:m.grupoNome, ms:[]}; grupos.push(g); } g.ms.push(m); });
+  $('#fxPerg').classList.toggle('hidden',fxSim);
+  $('#fxLista').innerHTML = !fxSim ? '' : (fxRasc.length ? '<div class="frow vhead"><span>Pessoa</span><span>Função fixa</span><span></span></div>' : '<p class="hint" style="margin:0">Ninguém com função fixa. Clique em “+ Pessoa com função fixa”.</p>') +
+    fxRasc.map((x,i)=>'<div class="frow" data-i="'+i+'"><select class="fxp">'+grupos.map(g=>'<optgroup label="'+esc(g.nome)+'">'+g.ms.map(m=>'<option value="'+m.id+'"'+(m.id===x.m?' selected':'')+(fxRasc.some((y,j)=>j!==i&&y.m===m.id)?' disabled':'')+'>'+esc(m.nome)+(m.papel==='cpm'?' (CPM)':'')+'</option>').join('')+'</optgroup>').join('')+
+      '</select><select class="fxf">'+vigilia.funcoes.map(f=>'<option value="'+f.id+'"'+(f.id===x.f?' selected':'')+'>'+esc(f.nome||'Sem nome')+'</option>').join('')+'</select><button type="button" class="btn danger sm fxrem" title="Tirar">✕</button></div>').join('');
+  $('#fxAdd').classList.toggle('hidden', !fxSim || fxRasc.length>=pres.length);
+  $('#fxNao').textContent = fxSim ? 'Cancelar' : 'Não, só gerar';
+  $('#fxSim').textContent = fxSim ? 'Gerar escala' : 'Sim, escolher';
+  $$('#fxLista .frow[data-i]').forEach(row=>{ const x=fxRasc[+row.dataset.i];
+    row.querySelector('.fxp').onchange=e=>{ x.m=e.target.value; pintarFixos(); };
+    row.querySelector('.fxf').onchange=e=>{ x.f=e.target.value; };
+    row.querySelector('.fxrem').onclick=()=>{ fxRasc.splice(+row.dataset.i,1); pintarFixos(); }; });
+  const fechar=()=>$('#fixoOverlay').classList.remove('show');
+  $('#fxClose').onclick=fechar;
+  $('#fixoOverlay').onclick=e=>{ if(e.target.id==='fixoOverlay') fechar(); };
+  $('#fxAdd').onclick=()=>{ novoFixo(); pintarFixos(); };
+  $('#fxNao').onclick=()=>{ if(fxSim){ fechar(); return; } vigRasc.fixos=[]; fechar(); gerarAgoraVig(); };
+  $('#fxSim').onclick=()=>{
+    if(!fxSim){ fxSim=true; if(!fxRasc.length) novoFixo(); pintarFixos(); return; }
+    const vistos={}; vigRasc.fixos=fxRasc.filter(x=>{ if(vistos[x.m]) return false; vistos[x.m]=1; return true; }).map(x=>({m:x.m,f:x.f}));
+    fechar(); gerarAgoraVig(); };
+}
+window.addFuncVig=async()=>{ if(!canEdit()) return; vigilia.funcoes.push({id:fid(), nome:'', area:'fotografia'}); vigFuncAberto=true; await persist(); renderVigilia(); const ins=$$('#subBox .vnome'); if(ins.length) ins[ins.length-1].focus(); };
 window.removeFuncVig=async(id)=>{ if(!canEdit()) return; const f=vigilia.funcoes.find(x=>x.id===id); if(!f||!confirm('Remover a função "'+(f.nome||'sem nome')+'"?')) return; vigilia.funcoes=vigilia.funcoes.filter(x=>x.id!==id); vigFuncAberto=true; await persist(); renderVigilia(); };
 window.abrirVig=id=>{ const x=vigilia.salvas.find(s=>s.id===id); if(!x) return;
   if(vigRasc && vigRasc.lista && !vigRasc.salvo && !confirm('Abrir esta vigília? A escala que ainda não foi salva vai sumir.')) return;
-  vigRasc={id:x.id, data:x.data||'', tema:x.tema||'', hora:x.hora||'', presentes:(x.presentes||[]).slice(), lista:(x.lista||[]).map(f=>Object.assign({},f,{pessoas:(f.pessoas||[]).slice()})), salvo:true, em:x.atualizado_em}; renderVigilia(); };
+  vigRasc={id:x.id, data:x.data||'', tema:x.tema||'', hora:x.hora||'', presentes:(x.presentes||[]).slice(), fixos:(x.fixos||[]).map(y=>({m:y.m,f:y.f})), lista:(x.lista||[]).map(f=>Object.assign({},f,{pessoas:(f.pessoas||[]).slice(), fixos:(f.fixos||[]).slice()})), salvo:true, em:x.atualizado_em}; renderVigilia(); };
 window.removerVig=async(id)=>{ if(!canEdit()) return; const x=vigilia.salvas.find(s=>s.id===id); if(!x||!confirm('Remover a vigília de '+(fmtData(x.data)||'sem data')+'?')) return;
   vigilia.salvas=vigilia.salvas.filter(s=>s.id!==id); if(vigRasc&&vigRasc.id===id) vigRasc=null; await persist(); renderVigilia(); toast('Vigília removida'); };
 window.novaVigilia=()=>{ if(vigRasc && vigRasc.lista && !vigRasc.salvo && !confirm('Começar uma nova? A escala que ainda não foi salva vai sumir.')) return; vigRasc=novaVig(); renderVigilia(); };
